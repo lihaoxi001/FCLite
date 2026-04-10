@@ -109,13 +109,13 @@ $bodyClass = implode(' ', $bodyClass);
     @media (min-width:768px){.container{max-width:720px}}
     @media (min-width:992px){.container{max-width:960px}}
     @media (min-width:1200px){.container{max-width:1320px}}
-    .post-card{position:relative;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;overflow:hidden;transition:box-shadow .2s,transform .2s;margin-bottom:1.5rem;padding:1.25rem}
-    .post-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px)}
+    .post-card{position:relative;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;overflow:hidden;transition:box-shadow .2s;margin-bottom:1.5rem;padding:1.25rem;will-change:box-shadow}
+    .post-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
     .post-card .card-link{position:absolute;inset:0;z-index:1}
     .post-card .card-body{position:relative;z-index:0}
     .post-card .card-row{display:flex;gap:1rem}
     .post-card .card-row .content-box{flex:1;min-width:0}
-    .post-card .card-row .mini-thumb{width:180px;height:120px;flex-shrink:0;border-radius:6px;background-size:cover;background-position:center;overflow:hidden}
+    .post-card .card-row .mini-thumb{width:180px;height:120px;aspect-ratio:3/2;flex-shrink:0;border-radius:6px;background-size:cover;background-position:center;overflow:hidden}
     .post-card .card-title{font-size:1.25rem;margin:0;color:inherit}
     .post-card .card-meta{font-size:.75rem;color:#888;white-space:nowrap}
     .post-card .card-meta a{color:#888}
@@ -133,13 +133,13 @@ $bodyClass = implode(' ', $bodyClass);
     .dark-color a{color:#ddd}
     .dark-color a:hover{color:#fff}
     </style>
-    <!--非关键 CSS 延迟加载-->
-    <link rel="preload" href="<?php $this->options->themeUrl('assets/css/base.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="<?php $this->options->themeUrl('assets/css/components.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="<?php $this->options->themeUrl('assets/css/facile.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="<?php $this->options->themeUrl('assets/css/icon-font.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="<?php $this->options->themeUrl('assets/css/icon-classes.css'); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!--非关键 CSS 延迟加载（media=print 避免阻塞渲染，onload 切换为 all）-->
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/base.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/components.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/facile.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/icon-font.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/icon-classes.css'); ?>" media="print" onload="this.media='all'">
     <noscript>
         <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/base.css'); ?>" type="text/css">
         <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/components.css'); ?>" type="text/css">

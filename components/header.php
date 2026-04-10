@@ -121,7 +121,8 @@ $bodyClass = implode(' ', $bodyClass);
     .post-card .card-body{position:relative;z-index:0}
     .post-card .card-row{display:flex;gap:1rem}
     .post-card .card-row .content-box{flex:1;min-width:0}
-    .post-card .card-row .mini-thumb{width:180px;height:120px;aspect-ratio:3/2;flex-shrink:0;border-radius:6px;background-size:cover;background-position:center;overflow:hidden}
+    .post-card .card-row .mini-thumb{width:180px;height:120px;aspect-ratio:3/2;flex-shrink:0;border-radius:6px;overflow:hidden}
+    .post-card .card-row .mini-thumb img{width:100%;height:100%;object-fit:cover;display:block}
     .post-card .card-title{font-size:1.25rem;margin:0;color:inherit}
     .post-card .card-meta{font-size:.75rem;color:#888;white-space:nowrap}
     .post-card .card-meta a{color:#888}
@@ -133,13 +134,13 @@ $bodyClass = implode(' ', $bodyClass);
     .dark-color .post-card .card-meta{color:#999}
     .dark-color .post-card .card-meta a{color:#999}
     .dark-color .post-card .card-summary{color:#bbb}
-    @media (max-width:576px){.post-card .card-row .mini-thumb{width:120px}}
+    @media (max-width:576px){.post-card .card-row .mini-thumb{width:120px;height:80px}}
     a{color:#222;text-decoration:none}
     a:hover{color:#000}
     .dark-color a{color:#ddd}
     .dark-color a:hover{color:#fff}
-    /*覆盖 Bootstrap 的 transition:all，仅动画可合成属性*/
-    *{transition-property:transform,opacity,box-shadow,background-color,color,border-color!important;transition-duration:.2s!important;transition-timing-function:ease-in-out!important}
+    /*限制 transition 到可合成属性，避免布局类动画*/
+    a,button,.btn,.badge,.nav-link,.navbar-brand,.post-card,.pagination a{transition-property:transform,opacity,box-shadow,background-color,color,border-color;transition-duration:.2s;transition-timing-function:ease-in-out}
     </style>
     <!--非关键 CSS 延迟加载（media=print 避免阻塞渲染，onload 切换为 all）-->
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/base.css'); ?>" media="print" onload="this.media='all'">

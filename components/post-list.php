@@ -1,6 +1,8 @@
 <?php
 
+$postIndex = 0;
 while ($this->next()):
+$postIndex++;
 ?>
 <div class="post-card">
     <?php $postListStyle = postListStyle($this->options->postListStyle, $this->fields->postListStyle); ?>
@@ -58,7 +60,7 @@ while ($this->next()):
                             </p>
                         </div>
                     </div>
-                    <div class="mini-thumb" style="background-image: url(<?php echo $headerImage; ?>);" loading="lazy"></div>
+                    <div class="mini-thumb"><img src="<?php echo $headerImage; ?>" alt="<?php $this->title(); ?>" width="180" height="120" <?php echo $postIndex > 1 ? 'loading="lazy"' : 'fetchpriority="high"'; ?> decoding="async"></div>
                 </div>
             <?php else: ?>
                 <div class="card-summary mt-3">

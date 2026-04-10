@@ -132,6 +132,8 @@ $bodyClass = implode(' ', $bodyClass);
     a:hover{color:#000}
     .dark-color a{color:#ddd}
     .dark-color a:hover{color:#fff}
+    /*覆盖 Bootstrap 的 transition:all，仅动画可合成属性*/
+    *{transition-property:transform,opacity,box-shadow,background-color,color,border-color!important;transition-duration:.2s!important;transition-timing-function:ease-in-out!important}
     </style>
     <!--非关键 CSS 延迟加载（media=print 避免阻塞渲染，onload 切换为 all）-->
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/base.css'); ?>" media="print" onload="this.media='all'">

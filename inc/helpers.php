@@ -604,14 +604,14 @@ function isArchivePage() {
 }
 
 /**
- * 生成 3:2 比例 WebP 缩略图（中心裁剪）
+ * 生成 1:1 裁剪的 WebP 缩略图
  *
- * @param string $srcUrl 原始图片 URL
- * @param int $width 输出宽度（默认 480px，高度按 3:2 计算）
+ * @param string $srcUrl 原图 URL
+ * @param int $size 输出尺寸（默认 480px）
  * @param int $quality WebP 质量（默认 75）
  * @return string|false 缩略图 URL 或 false
  */
-function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
+function generateSquareWebP($srcUrl, $size = 480, $quality = 75) {
     // 只处理本站上传的图片
     $siteUrl = Helper::options()->siteUrl;
     if (strpos($srcUrl, $siteUrl) === false) {
@@ -671,32 +671,18 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
     $srcW = imagesx($srcImg);
     $srcH = imagesy($srcImg);
 
-    // 3:2 中心裁剪
-    $aspectRatio = 3.0 / 2.0;
-    $height = (int)round($width / $aspectRatio);
-    $srcRatio = $srcW / $srcH;
+    // 1:1 中心裁剪
+    $cropSize = min($srcW, $srcH);
+    $cropX = (int)(($srcW - $cropSize) / 2);
+    $cropY = (int)(($srcH - $cropSize) / 2);
 
-    if ($srcRatio > $aspectRatio) {
-        // 源图更宽，裁剪两侧
-        $cropH = $srcH;
-        $cropW = (int)round($srcH * $aspectRatio);
-        $cropX = (int)(($srcW - $cropW) / 2);
-        $cropY = 0;
-    } else {
-        // 源图更高，裁剪上下
-        $cropW = $srcW;
-        $cropH = (int)round($srcW / $aspectRatio);
-        $cropX = 0;
-        $cropY = (int)(($srcH - $cropH) / 2);
-    }
-
-    $thumbImg = imagecreatetruecolor($width, $height);
+    $thumbImg = imagecreatetruecolor($size, $size);
     imagealphablending($thumbImg, false);
     imagesavealpha($thumbImg, true);
     $transparent = imagecolorallocatealpha($thumbImg, 0, 0, 0, 127);
     imagefill($thumbImg, 0, 0, $transparent);
 
-    imagecopyresampled($thumbImg, $srcImg, 0, 0, $cropX, $cropY, $width, $height, $cropW, $cropH);
+    imagecopyresampled($thumbImg, $srcImg, 0, 0, $cropX, $cropY, $size, $size, $cropSize, $cropSize);
 
     $result = imagewebp($thumbImg, $thumbPath, $quality);
 

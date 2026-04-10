@@ -1,6 +1,12 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 
+// 安全响应头
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+
 // 让主题使用的时区跟随 Typecho 设置的时区
 setTimezoneByOffset($this->options->timezone);
 // 检测是否包含主题配色 cookie

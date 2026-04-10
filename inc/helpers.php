@@ -435,9 +435,9 @@ function isQQEmail($email) {
  * @return void
  */
 function QQAvatar($email, $name, $size) {
-    $qq = str_replace('@qq.com', '', $email);  // 获取QQ号
+    $qq = str_replace('@qq.com', '', $email);
     $imgUrl = 'https://q2.qlogo.cn/headimg_dl?dst_uin=' . $qq . '&spec=' . $size;
-    echo '<img src="' . $imgUrl . '" alt="' . $name . '" class="avatar">';
+    echo '<img src="' . $imgUrl . '" alt="' . $name . '" class="avatar" loading="lazy" decoding="async">';
 }
 
 /**
@@ -794,7 +794,7 @@ function gravatar($email, $size, $gravatarUrl = '', $alt = '') {
     if ($gravatarUrl == '' or $gravatarUrl == null) {
         $url = 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($email))) . '?s=' . $size;
     }
-    echo '<img src="' . $url . '" alt="' . $alt . '" class="avatar" />';
+    echo '<img src="' . $url . '" alt="' . $alt . '" class="avatar" loading="lazy" decoding="async" />';
 }
 
 /**

@@ -584,9 +584,9 @@ function postImg($a, $defaultUrl) {
 
     if (!$img) return false;
 
-    // 列表页：非 WebP 图片生成 1:1 裁剪的 WebP 缓存
+    // 列表页：非 WebP 图片生成 3:2 裁剪的 WebP 缓存
     if (isArchivePage()) {
-        $thumb = generateSquareWebP($img, 480);
+        $thumb = generateCropWebP($img, 480);
         return $thumb ? $thumb : $img;
     }
 
@@ -604,14 +604,14 @@ function isArchivePage() {
 }
 
 /**
- * 生成 1:1 裁剪的 WebP 缩略图
+ * 生成 3:2 裁剪的 WebP 缩略图
  *
  * @param string $srcUrl 原图 URL
- * @param int $size 输出尺寸（默认 480px）
+ * @param int $width 输出宽度（默认 480px）
  * @param int $quality WebP 质量（默认 75）
  * @return string|false 缩略图 URL 或 false
  */
-function generateSquareWebP($srcUrl, $size = 480, $quality = 75) {
+function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
     // 只处理本站上传的图片
     $siteUrl = Helper::options()->siteUrl;
     if (strpos($srcUrl, $siteUrl) === false) {
@@ -636,7 +636,7 @@ function generateSquareWebP($srcUrl, $size = 480, $quality = 75) {
     // 缩略图存到主题目录：assets/cache/thumbs/
     $themeDir = __DIR__ . '/..';
     $thumbDir = $themeDir . '/assets/cache/thumbs';
-    $thumbName = md5($srcUrl) . '_w' . $size . '.webp';
+    $thumbName = md5($srcUrl) . '_w' . $width . '.webp';
     $thumbPath = $thumbDir . '/' . $thumbName;
     $thumbUrl = Helper::options()->themeUrl . '/assets/cache/thumbs/' . $thumbName;
 
@@ -671,18 +671,33 @@ function generateSquareWebP($srcUrl, $size = 480, $quality = 75) {
     $srcW = imagesx($srcImg);
     $srcH = imagesy($srcImg);
 
-    // 1:1 中心裁剪
-    $cropSize = min($srcW, $srcH);
-    $cropX = (int)(($srcW - $cropSize) / 2);
-    $cropY = (int)(($srcH - $cropSize) / 2);
+    // 3:2 中心裁剪
+    $height = (int)round($width / (3.0 / 2.0));
+    $targetRatio = 3.0 / 2.0;
+    $srcRatio = $srcW / $srcH;
 
-    $thumbImg = imagecreatetruecolor($size, $size);
+    // 根据源图宽高比与 3:2 的关系，决定裁剪两侧还是上下
+    if ($srcRatio > $targetRatio) {
+        // 源图更宽，裁剪左右两侧
+        $cropW = (int)round($srcH * $targetRatio);
+        $cropH = $srcH;
+        $cropX = (int)(($srcW - $cropW) / 2);
+        $cropY = 0;
+    } else {
+        // 源图更高，裁剪上下
+        $cropW = $srcW;
+        $cropH = (int)round($srcW / $targetRatio);
+        $cropX = 0;
+        $cropY = (int)(($srcH - $cropH) / 2);
+    }
+
+    $thumbImg = imagecreatetruecolor($width, $height);
     imagealphablending($thumbImg, false);
     imagesavealpha($thumbImg, true);
     $transparent = imagecolorallocatealpha($thumbImg, 0, 0, 0, 127);
     imagefill($thumbImg, 0, 0, $transparent);
 
-    imagecopyresampled($thumbImg, $srcImg, 0, 0, $cropX, $cropY, $size, $size, $cropSize, $cropSize);
+    imagecopyresampled($thumbImg, $srcImg, 0, 0, $cropX, $cropY, $width, $height, $cropW, $cropH);
 
     $result = imagewebp($thumbImg, $thumbPath, $quality);
 

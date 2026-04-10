@@ -571,15 +571,125 @@ function headerImageDisplay($t, $options, $defaultImageUrl) {
 function postImg($a, $defaultUrl) {
     // 手动输入文章头图
     if ($a->fields->imageSource == 'url' && $a->fields->thumb != '') {
-        return $a->fields->thumb;
+        $img = $a->fields->thumb;
     }
     // 随机文章头图
-    if ($a->fields->imageSource == 'default') {
-        return randomHeaderImage($defaultUrl);
+    elseif ($a->fields->imageSource == 'default') {
+        $img = randomHeaderImage($defaultUrl);
     }
     // 默认使用第一张图片作为文章头图
-    $img = getPostImg($a);
+    else {
+        $img = getPostImg($a);
+    }
+
+    if (!$img) return false;
+
+    // 列表页：非 WebP 图片生成 1:1 裁剪的 WebP 缓存
+    if (isArchivePage()) {
+        $thumb = generateSquareWebP($img, 480);
+        return $thumb ? $thumb : $img;
+    }
+
     return $img;
+}
+
+/**
+ * 判断当前是否为列表页（首页/归档/分类/标签）
+ *
+ * @return bool
+ */
+function isArchivePage() {
+    if (!isset($GLOBALS['page'])) return false;
+    return in_array($GLOBALS['page'], array('index', 'archive'));
+}
+
+/**
+ * 生成 1:1 裁剪的 WebP 缩略图
+ *
+ * @param string $srcUrl 原图 URL
+ * @param int $size 输出尺寸（默认 480px）
+ * @param int $quality WebP 质量（默认 75）
+ * @return string|false 缩略图 URL 或 false
+ */
+function generateSquareWebP($srcUrl, $size = 480, $quality = 75) {
+    // 只处理本站上传的图片
+    $siteUrl = Helper::options()->siteUrl;
+    if (strpos($srcUrl, $siteUrl) === false) {
+        return false;
+    }
+
+    // 已经是 WebP 格式就跳过
+    $ext = strtolower(pathinfo(parse_url($srcUrl, PHP_URL_PATH), PATHINFO_EXTENSION));
+    if ($ext === 'webp') {
+        return false;
+    }
+
+    // 获取绝对路径
+    $relativePath = str_replace($siteUrl, '', $srcUrl);
+    $relativePath = strtok($relativePath, '?');
+    $absPath = __TYPECHO_ROOT_DIR__ . '/' . $relativePath;
+
+    if (!file_exists($absPath)) {
+        return false;
+    }
+
+    // 缩略图存到主题目录：assets/cache/thumbs/
+    $themeDir = __DIR__ . '/..';
+    $thumbDir = $themeDir . '/assets/cache/thumbs';
+    $thumbName = md5($srcUrl) . '_w' . $size . '.webp';
+    $thumbPath = $thumbDir . '/' . $thumbName;
+    $thumbUrl = Helper::options()->themeUrl . '/assets/cache/thumbs/' . $thumbName;
+
+    // 缓存命中且比原图新
+    if (file_exists($thumbPath) && filemtime($thumbPath) >= filemtime($absPath)) {
+        return $thumbUrl;
+    }
+
+    // 创建 thumbs 目录
+    if (!is_dir($thumbDir)) {
+        mkdir($thumbDir, 0755, true);
+    }
+
+    // 读取原图
+    switch ($ext) {
+        case 'jpg':
+        case 'jpeg':
+            $srcImg = @imagecreatefromjpeg($absPath);
+            break;
+        case 'png':
+            $srcImg = @imagecreatefrompng($absPath);
+            break;
+        case 'gif':
+            $srcImg = @imagecreatefromgif($absPath);
+            break;
+        default:
+            return false;
+    }
+
+    if (!$srcImg) return false;
+
+    $srcW = imagesx($srcImg);
+    $srcH = imagesy($srcImg);
+
+    // 1:1 中心裁剪
+    $cropSize = min($srcW, $srcH);
+    $cropX = (int)(($srcW - $cropSize) / 2);
+    $cropY = (int)(($srcH - $cropSize) / 2);
+
+    $thumbImg = imagecreatetruecolor($size, $size);
+    imagealphablending($thumbImg, false);
+    imagesavealpha($thumbImg, true);
+    $transparent = imagecolorallocatealpha($thumbImg, 0, 0, 0, 127);
+    imagefill($thumbImg, 0, 0, $transparent);
+
+    imagecopyresampled($thumbImg, $srcImg, 0, 0, $cropX, $cropY, $size, $size, $cropSize, $cropSize);
+
+    $result = imagewebp($thumbImg, $thumbPath, $quality);
+
+    imagedestroy($srcImg);
+    imagedestroy($thumbImg);
+
+    return $result ? $thumbUrl : false;
 }
 
 /**

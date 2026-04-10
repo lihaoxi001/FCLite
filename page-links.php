@@ -42,7 +42,7 @@ if (
 $this->need('components/header.php');
 ?>
 
-<div class="container main" id="main">
+<main class="container main" id="main">
     <div class="row my-4">
         <div class="col-xl-8 col-lg-8 post-page mb-5 mb-sm-5 mb-md-5 mb-lg-0 mb-xl-0">
             <?php if ($this->options->breadcrumb == 'on'): ?>
@@ -115,6 +115,6 @@ $this->need('components/header.php');
         </div>
         <?php $this->need('components/sidebar.php'); ?>
     </div>
-</div>
+</main>
 
 <?php $this->need('components/footer.php'); ?>

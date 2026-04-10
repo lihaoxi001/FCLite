@@ -18,7 +18,8 @@ checkField();
 $this->need('components/header.php');
 ?>
 
-<div class="container main" id="main">
+<main class="container main" id="main">
+    <h1 class="sr-only"><?php $this->options->title(); ?></h1>
     <div class="row mt-4">
         <div class="col-xl-8 col-lg-8 post-list">
             <?php if ($this->have()): ?>
@@ -34,6 +35,6 @@ $this->need('components/header.php');
         </div>
         <?php $this->need('components/sidebar.php'); ?>
     </div>
-</div>
+</main>
 
 <?php $this->need('components/footer.php'); ?>

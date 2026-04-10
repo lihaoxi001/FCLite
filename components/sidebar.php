@@ -152,7 +152,7 @@ $components = explode(',', $components);
                 <?php $limit = $this->options->tagCount == 0?1000:$this->options->tagCount; ?>
                 <?php $this->widget('Widget_Metas_Tag_Cloud', 'sort=mid&ignoreZeroCount=1&desc=0&limit=' . $limit)->to($tags); ?>
                 <?php if($tags->have()): ?>
-                    <div role="group" aria-label="<?php echo $GLOBALS['t']['sidebar']['tags']; ?>" class="clearfix">
+                    <div role="list" aria-label="<?php echo $GLOBALS['t']['sidebar']['tags']; ?>" class="clearfix">
                         <?php
                         $tagsColor = array(
                             'badge-primary',

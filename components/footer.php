@@ -77,11 +77,7 @@
 <?php if ($this->options->bodyHTML): ?>
     <?php $this->options->bodyHTML(); ?>
 <?php endif; ?>
-<style>
-.avatar{height:auto!important;width:auto!important}
-.sidebar .blog-info .blog-user-info .avatar{width:56px!important;height:56px!important}
-#comments .comments-lists .comment-author .avatar{width:42px!important;height:42px!important}
-</style>
+
 <?php $this->footer(); ?>
 </body>
 </html>

@@ -107,6 +107,7 @@ $bodyClass = implode(' ', $bodyClass);
     <link rel="icon" href="<?php echo $this->options->logoUrl?$this->options->logoUrl:$this->options->siteUrl . 'favicon.ico'; ?>" type="image/x-icon">
     <!--关键 CSS 内联，加速首屏渲染-->
     <style>
+    *,*::before,*::after{box-sizing:border-box}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.5;color:#333;background-color:#fff}
     .navbar{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.5rem 1rem}
     .navbar-brand{display:inline-block;padding-top:.3125rem;padding-bottom:.3125rem;margin-right:1rem;font-size:1.25rem;line-height:inherit;white-space:nowrap;color:#222;text-decoration:none}
@@ -115,6 +116,11 @@ $bodyClass = implode(' ', $bodyClass);
     @media (min-width:768px){.container{max-width:720px}}
     @media (min-width:992px){.container{max-width:960px}}
     @media (min-width:1200px){.container{max-width:1320px}}
+    /*Bootstrap 网格基础，防止延迟 CSS 加载后布局跳动*/
+    .row{display:flex;flex-wrap:wrap;margin-right:-15px;margin-left:-15px}
+    .col,.col-xl-8,.col-lg-8,.col-xl-4,.col-lg-4{position:relative;width:100%;padding-right:15px;padding-left:15px}
+    @media (min-width:992px){.col-lg-8{flex:0 0 66.6667%;max-width:66.6667%}.col-lg-4{flex:0 0 33.3333%;max-width:33.3333%}}
+    @media (min-width:1200px){.col-xl-8{flex:0 0 66.6667%;max-width:66.6667%}.col-xl-4{flex:0 0 33.3333%;max-width:33.3333%}}
     .post-card{position:relative;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;overflow:hidden;transition:box-shadow .2s;margin-bottom:1.5rem;padding:1.25rem;will-change:box-shadow}
     .post-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
     .post-card .card-link{position:absolute;inset:0;z-index:1}
@@ -134,6 +140,10 @@ $bodyClass = implode(' ', $bodyClass);
     .dark-color .post-card .card-meta{color:#999}
     .dark-color .post-card .card-meta a{color:#999}
     .dark-color .post-card .card-summary{color:#bbb}
+    /*头像尺寸固定，防止布局偏移*/
+    .avatar{width:56px;height:56px}
+    .sidebar .blog-info .blog-user-info .avatar{width:56px;height:56px}
+    #comments .comments-lists .comment-author .avatar{width:42px;height:42px}
     @media (max-width:576px){.post-card .card-row .mini-thumb{width:120px;height:80px}}
     a{color:#222;text-decoration:none}
     a:hover{color:#000}

@@ -119,7 +119,7 @@ $bodyClass = implode(' ', $bodyClass);
     .post-card .card-title{font-size:1.25rem;margin:0;color:inherit}
     .post-card .card-meta{font-size:.75rem;color:#888;white-space:nowrap}
     .post-card .card-meta a{color:#888}
-    .post-card .card-summary{margin-top:.75rem;color:#555;max-height:6.3em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
+    .post-card .card-summary{margin-top:.75rem;color:#555;font-size:.875rem;max-height:7.5em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical}
     .post-card .card-summary p{margin:0;line-height:1.5}
     .dark-color .post-card{background:#1a1a1f;border-color:rgba(255,255,255,.08)}
     .dark-color .post-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.3)}

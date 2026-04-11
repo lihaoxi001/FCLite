@@ -121,7 +121,7 @@ $bodyClass = implode(' ', $bodyClass);
     .col,.col-xl-8,.col-lg-8,.col-xl-4,.col-lg-4{position:relative;width:100%;padding-right:15px;padding-left:15px}
     @media (min-width:992px){.col-lg-8{flex:0 0 66.6667%;max-width:66.6667%}.col-lg-4{flex:0 0 33.3333%;max-width:33.3333%}}
     @media (min-width:1200px){.col-xl-8{flex:0 0 66.6667%;max-width:66.6667%}.col-xl-4{flex:0 0 33.3333%;max-width:33.3333%}}
-    .post-card{position:relative;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;overflow:hidden;transition:box-shadow .2s;margin-bottom:1.5rem;padding:1.25rem;will-change:box-shadow}
+    .post-card{position:relative;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:8px;overflow:hidden;transition:box-shadow .2s;margin-bottom:1.5rem;padding:1rem;will-change:box-shadow}
     .post-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)}
     .post-card .card-link{position:absolute;inset:0;z-index:1}
     .post-card .card-body{position:relative;z-index:0}

@@ -16,8 +16,14 @@
     <script><?php $this->options->pjaxEnd(); ?></script>
 <?php endif; ?>
 
-<!--JS 延迟加载，不阻塞页面渲染-->
-<script defer src="<?php $this->options->themeUrl('assets/js/bundle-1774276299.js'); ?>"></script>
+<!--独立 JS 文件加载，替代损坏的 webpack bundle-->
+<script src="<?php $this->options->themeUrl('assets/js/jquery-3.5.1.min.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/jquery.pjax.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/bootstrap.bundle.min.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/highlight.pack.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/qrious.min.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/clipboard.min.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/directory-toggle.js'); ?>"></script>
 <script>
 (function(){
     var toggler = document.querySelector('.navbar-toggler');

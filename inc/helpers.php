@@ -586,7 +586,7 @@ function postImg($a, $defaultUrl) {
 
     // 列表页：非 WebP 图片生成 3:2 裁剪的 WebP 缓存
     if (isArchivePage()) {
-        $thumb = generateCropWebP($img, 480);
+        $thumb = generateCropWebP($img, 160);
         return $thumb ? $thumb : $img;
     }
 

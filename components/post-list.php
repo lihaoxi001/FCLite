@@ -11,7 +11,7 @@ $headerImage = headerImageDisplay($this, $this->options->headerImage, $this->opt
         <a href="<?php $this->permalink(); ?>" class="card-link" aria-label="<?php $this->title(); ?>"></a>
         <?php if ($headerImage): ?>
         <div class="card-thumb">
-            <img src="<?php echo $headerImage; ?>" alt="<?php $this->title(); ?>" width="160" height="100" <?php echo $postIndex > 1 ? 'loading="lazy"' : 'fetchpriority="high"'; ?> decoding="async">
+            <img src="<?php echo $headerImage; ?>" alt="<?php $this->title(); ?>" width="160" height="90" <?php echo $postIndex > 1 ? 'loading="lazy"' : 'fetchpriority="high"'; ?> decoding="async">
         </div>
         <?php endif; ?>
         <div class="card-info">

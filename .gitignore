@@ -1,2 +1,6 @@
 cache/
+backup_*/
+*.bak*
+assets/css.bak.*
+components/*.bak.*
 

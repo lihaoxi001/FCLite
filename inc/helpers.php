@@ -321,7 +321,7 @@ function reply($parent) {
  */
 function checkField() {
     // 如果已经检查过字段则直接返回，避免每次页面加载都执行数据库查询
-    if (Typecho_Cookie::get('__typecho_theme_facile_field_checked')) {
+    if (Typecho_Cookie::get('__typecho_theme_fclite_field_checked')) {
         return;
     }
 
@@ -365,7 +365,7 @@ function checkField() {
     }
 
     // 标记字段已检查，后续请求不再执行
-    Typecho_Cookie::set('__typecho_theme_facile_field_checked', '1');
+    Typecho_Cookie::set('__typecho_theme_fclite_field_checked', '1');
 }
 
 /**
@@ -437,7 +437,7 @@ function isQQEmail($email) {
 function QQAvatar($email, $name, $size) {
     $qq = str_replace('@qq.com', '', $email);
     $imgUrl = 'https://q2.qlogo.cn/headimg_dl?dst_uin=' . $qq . '&spec=' . $size;
-    echo '<img src="' . $imgUrl . '" alt="' . $name . '" class="avatar" loading="lazy" decoding="async">';
+    echo '<img src="' . $imgUrl . '" alt="' . $name . '" class="avatar" width="' . $size . '" height="' . $size . '" loading="lazy" decoding="async">';
 }
 
 /**
@@ -584,8 +584,8 @@ function postImg($a, $defaultUrl) {
 
     if (!$img) return false;
 
-    // 列表页：非 WebP 图片生成 3:2 裁剪的 WebP 缓存
-    if (isArchivePage()) {
+    // 列表页：开启 WebP 缩略图时，非 WebP 图片生成 3:2 裁剪的 WebP 缓存
+    if (isArchivePage() && Helper::options()->webpThumbnail === 'on') {
         $thumb = generateCropWebP($img, 160);
         return $thumb ? $thumb : $img;
     }
@@ -714,8 +714,12 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
  * @return false|string 返回文章头图或 false
  */
 function getPostImg($archive) {
-    // 使用 preg_match 而非 preg_match_all，只需找到第一张图片即可，性能更好
+    // 优先匹配 HTML img 标签
     if (preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $archive->content, $match)) {
+        return $match[1];
+    }
+    // 回退匹配 Markdown 图片语法 ![alt](url)
+    if (preg_match('/!\[[^\]]*\]\(([^)\s]+)\)/i', $archive->content, $match)) {
         return $match[1];
     }
     return false;
@@ -919,7 +923,7 @@ function gravatar($email, $size, $gravatarUrl = '', $alt = '') {
     if ($gravatarUrl == '' or $gravatarUrl == null) {
         $url = 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($email))) . '?s=' . $size;
     }
-    echo '<img src="' . $url . '" alt="' . $alt . '" class="avatar" loading="lazy" decoding="async" />';
+    echo '<img src="' . $url . '" alt="' . $alt . '" class="avatar" width="' . $size . '" height="' . $size . '" loading="lazy" decoding="async" />';
 }
 
 /**

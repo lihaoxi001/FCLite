@@ -3,13 +3,12 @@
 // 主题设置
 function themeConfig($form) {
     echo <<<EOT
-    <p>您现在使用的是 Facile 2.5 <a href="https://github.com/changbin1997/Facile/releases" target="_blank">点击查看最新发行版</a></p>
-    <p>主题使用帮助 <a href="https://facile.misterma.com/" target="_blank">点击查看帮助文档</a> ，遇到问题也可以到 <a href="https://www.misterma.com/msg.html" target="_blank">留言板</a> 或 <a href="https://www.misterma.com/archives/899/" target="_blank">Facile 介绍页</a> 留言。因为我有两个主题，为了更高效的解决问题，建议到 <a href="https://www.misterma.com/archives/899/" target="_blank">Facile 介绍页</a> 留言。</p>
+    <p>您现在使用的是 FCLite 1.0（基于 Facile 2.5 二次开发）</p>
     <button aria-describedby="export-description" id="export-btn" type="button" class="btn">导出主题配置文件</button>
     <button aria-describedby="export-description" id="import-btn" type="button" class="btn">导入主题配置文件</button>
     <a href="javascript:;" id="download-file" style="display: none;">下载</a>
     <input type="file" id="file-select" style="display: none;">
-    <p id="export-description"><b>导出主题配置文件</b> 可以把主题外观设置导出为 JSON 文件，主要用来备份主题设置，<b>导入主题配置文件</b> 可以导入 <b>Facile</b> 主题的 JSON 配置文件。Typecho 切换主题的时候会清空主题设置，为了避免重复设置，在切换主题之前可以先导出主题设置配置。
+    <p id="export-description"><b>导出主题配置文件</b> 可以把主题外观设置导出为 JSON 文件，主要用来备份主题设置，<b>导入主题配置文件</b> 可以导入 <b>FCLite</b> 主题的 JSON 配置文件。Typecho 切换主题的时候会清空主题设置，为了避免重复设置，在切换主题之前可以先导出主题设置配置。
     <div id="options-list">
         <h3>选项目录</h3>
         <ul aria-label="选项目录 - 点击可快速滚动到对应的选项分组"></ul>
@@ -131,6 +130,12 @@ EOT;
         'on' => '启用',
         'off' => '禁用'
     ), 'off', _t('图片懒加载'), _t('开启后文章内的图片不会自动加载，只有图片进入页面可视区才会加载')));
+
+    // WebP 缩略图
+    $form->addInput(new Typecho_Widget_Helper_Form_Element_Radio('webpThumbnail', array(
+        'on' => '启用',
+        'off' => '禁用'
+    ), 'off', _t('WebP 缩略图'), _t('开启后文章列表页的文章头图会自动生成 3:2 裁剪的 WebP 缩略图，大幅减小图片体积（通常减少 90%+），提升页面加载速度。<br><br><b style="color:#C7254E;">使用前请确保满足以下条件：</b><br><b>① PHP 扩展</b>：服务器 PHP 需安装 <code>GD</code> 扩展且启用 <code>imagewebp</code> 函数（PHP 5.4+ 自带 GD，但部分环境可能未编译 WebP 支持）。可在 PHP 信息页面搜索 <code>WebP</code> 确认。<br><b>② 缓存目录权限</b>：PHP 进程需要对主题目录下的 <code>assets/cache/thumbs/</code> 有<strong>写权限</strong>。如果使用 Docker 部署，需确保宿主机目录权限映射正确（容器内 www-data 用户的 UID 需有写权限）。<br><b>③ 原图格式</b>：支持 JPG、PNG、GIF 格式的原图，WebP 格式原图会直接跳过不处理。<br><br>启用后首次访问列表页时会逐个生成缩略图，之后访问将命中缓存。缩略图缓存在 <code>assets/cache/thumbs/</code> 目录下，删除该目录即可清空缓存。')));
 
     //  文章头图设置
     $headerImage = new Typecho_Widget_Helper_Form_Element_Checkbox('headerImage', array(

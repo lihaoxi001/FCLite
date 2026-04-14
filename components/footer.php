@@ -1,4 +1,4 @@
-<!-- Facile Theme by Changbin (https://github.com/changbin1997/Facile) -->
+<!-- FCLite Theme based on Facile by Changbin (https://github.com/changbin1997/Facile) -->
 <footer>
     <div class="container py-3">
         <?php if ($this->options->icp): ?>
@@ -21,27 +21,51 @@
 <script src="<?php $this->options->themeUrl('assets/js/jquery.pjax.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/highlight.pack.js'); ?>"></script>
+<script>
+hljs.initHighlightingOnLoad();
+// 根据当前主题设置代码高亮配色类
+(function(){
+    var body = document.body;
+    if (!body.classList.contains('follow-theme-color')) return;
+    var isDark = body.classList.contains('dark-color') ||
+        (body.classList.contains('auto-color') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    body.classList.add(isDark ? 'vs2015' : 'stackoverflow-light');
+})();
+</script>
 <script src="<?php $this->options->themeUrl('assets/js/qrious.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/clipboard.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/directory-toggle.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/emoji-init.js'); ?>"></script>
 <script>
+// 点赞功能
 (function(){
-    var toggler = document.querySelector('.navbar-toggler');
-    var target = toggler ? toggler.getAttribute('data-target') : null;
-    var collapseEl = target ? document.querySelector(target) : null;
-    if (!toggler || !collapseEl) return;
-
-    toggler.addEventListener('click', function(e){
-        e.preventDefault();
-        var isShown = collapseEl.classList.contains('show');
-        if (isShown) {
-            collapseEl.classList.remove('show');
-            toggler.setAttribute('aria-expanded', 'false');
-        } else {
-            collapseEl.classList.add('show');
-            toggler.setAttribute('aria-expanded', 'true');
-        }
+    var btn = document.querySelector('.agree-btn');
+    if (!btn || btn.disabled) return;
+    btn.addEventListener('click', function(){
+        btn.disabled = true;
+        var cid = btn.getAttribute('data-cid');
+        var url = btn.getAttribute('data-url');
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.timeout = 15000;
+        xhr.onload = function(){
+            if (xhr.status === 200 && /^\d+$/.test(xhr.responseText.trim())) {
+                var numEl = btn.querySelector('.agree-num');
+                if (numEl) numEl.textContent = (window.t && window.t.like ? window.t.like : '赞') + ' ' + xhr.responseText.trim();
+            } else {
+                btn.disabled = false;
+            }
+        };
+        xhr.onerror = function(){ btn.disabled = false; };
+        xhr.send('agree=' + cid);
     });
+})();
+// 分享二维码
+(function(){
+    var canvas = document.getElementById('qr');
+    if (!canvas || typeof QRious === 'undefined') return;
+    new QRious({ element: canvas, value: location.href, size: 150 });
 })();
 </script>
 <script>

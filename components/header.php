@@ -7,6 +7,11 @@ header('X-Frame-Options: SAMEORIGIN');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
 
+// 静态资源缓存头（供 CDN/Cloudflare 使用）
+if (preg_match('/\.(css|js|woff2?|ttf|eot|svg|png|jpe?g|gif|webp|ico)$/i', $_SERVER['REQUEST_URI'] ?? '')) {
+    header('Cache-Control: public, max-age=31536000, immutable');
+}
+
 // 让主题使用的时区跟随 Typecho 设置的时区
 setTimezoneByOffset($this->options->timezone);
 // 检测是否包含主题配色 cookie
@@ -68,8 +73,7 @@ $bodyClass = implode(' ', $bodyClass);
     <link rel="dns-prefetch" href="https://www.gravatar.com">
     <link rel="dns-prefetch" href="<?php echo parse_url($this->options->siteUrl, PHP_URL_HOST); ?>">
     <link rel="preconnect" href="https://www.gravatar.com" crossorigin>
-    <!--资源预加载-->
-    <link rel="prefetch" href="<?php $this->options->themeUrl('assets/js/bundle-1774276299.js'); ?>" as="script">
+    <!--预加载关键资源-->
     <!--搜索页添加 noindex-->
     <?php if ($this->is('search') && $this->options->searchPageNoindex == 'show'): ?>
         <meta name="robots" content="noindex, follow">
@@ -155,6 +159,7 @@ $bodyClass = implode(' ', $bodyClass);
     <!--合并 CSS：theme.css(主题) + icon-font.css(字体图标)-->
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/theme.css'); ?>" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/icon-font.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>" media="print" onload="this.media='all'">
     <?php localizeScript(); ?>
     <!--自定义 CSS-->
     <?php if ($this->options->cssCode): ?>

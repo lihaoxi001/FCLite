@@ -1,8 +1,8 @@
 <?php
 /**
- * 这是一套简洁的博客主题 <a href="https://facile.misterma.com/" target="_blank">点击查看使用说明</a>
+ * 这是一套独立的博客主题，基于 Facile 二次开发
  *
- * @package Facile
+ * @package FCLite
  * @author Changbin
  * @version 2.5
  * @link https://www.misterma.com

@@ -23,13 +23,13 @@ $components = explode(',', $components);
                         <?php
                             $avatarName = $this->options->nickname?$this->options->nickname . '的头像':$this->options->title . '的头像';
                             if ($this->options->avatarUrl) {
-                                echo '<img src="' . $this->options->avatarUrl . '" alt="' . $avatarName . '" class="avatar" />';
+                                echo '<img src="' . $this->options->avatarUrl . '" alt="' . $avatarName . '" class="avatar" width="56" height="56" />';
                             }else {
                                 gravatar($userInfo['mail'], 56, $this->options->gravatarUrl, $avatarName);
                             }
                         ?>
                         <div class="blog-text-info ml-3">
-                            <h5 class="mb-1"><a aria-describedby="blog-description" href="<?php echo $this->options->nicknameUrl?$this->options->nicknameUrl:$this->options->siteUrl; ?>" target="_blank"><?php echo $this->options->nickname?$this->options->nickname:$userInfo['screenName']; ?></a></h5>
+                            <h3 class="mb-1 h5"><a aria-describedby="blog-description" href="<?php echo $this->options->nicknameUrl?$this->options->nicknameUrl:$this->options->siteUrl; ?>" target="_blank"><?php echo $this->options->nickname?$this->options->nickname:$userInfo['screenName']; ?></a></h3>
                             <p id="blog-description" class="m-0"><?php echo $this->options->Introduction?$this->options->Introduction:$this->options->description; ?></p>
                         </div>
                     </div>
@@ -109,11 +109,11 @@ $components = explode(',', $components);
                                     }
                                 ?>
                                 <div class="media-body">
-                                    <h5 class="mb-0 text-truncate">
+                                    <h3 class="mb-0 h5 text-truncate">
                                         <a href="<?php $comments->permalink(); ?>" title="<?php printf($GLOBALS['t']['sidebar']['commentOn'], $comments->title); ?>" data-toggle="tooltip" data-placement="top">
                                             <?php $comments->author(false); ?>
                                         </a>
-                                    </h5>
+                                    </h3>
                                     <p class="m-0"><?php $comments->excerpt(40, '...'); ?></p>
                                 </div>
                             </li>

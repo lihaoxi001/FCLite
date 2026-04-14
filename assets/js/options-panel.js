@@ -92,7 +92,7 @@ window.addEventListener('load', () => {
     backup = JSON.stringify(backup, null, 2);
     const blob = new Blob([backup]);
     document.querySelector('#download-file').href = URL.createObjectURL(blob);
-    document.querySelector('#download-file').download = 'facile-config.json';
+    document.querySelector('#download-file').download = 'fclite-config.json';
     document.querySelector('#download-file').click();
   });
 

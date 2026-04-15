@@ -614,6 +614,10 @@ function isArchivePage() {
 function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
     // 只处理本站上传的图片
     $siteUrl = Helper::options()->siteUrl;
+    // 相对路径补全为完整 URL
+    if (strpos($srcUrl, '//') !== 0 && strpos($srcUrl, '/') === 0) {
+        $srcUrl = rtrim($siteUrl, '/') . $srcUrl;
+    }
     if (strpos($srcUrl, $siteUrl) === false) {
         return false;
     }

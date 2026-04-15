@@ -7,6 +7,7 @@ if ($components == null or $components == '') {
 }
 // 去除空格
 $components = str_replace(' ', '', $components);
+$components = str_replace('，', ',', $components);
 // 转为数组
 $components = explode(',', $components);
 ?>

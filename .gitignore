@@ -4,3 +4,7 @@ backup_*/
 assets/css.bak.*
 components/*.bak.*
 
+
+# Backup files
+*.bak
+*.bak.*

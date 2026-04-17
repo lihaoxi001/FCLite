@@ -157,9 +157,9 @@ $bodyClass = implode(' ', $bodyClass);
     a,button,.btn,.badge,.nav-link,.navbar-brand,.post-card,.pagination a{transition-property:transform,opacity,box-shadow,background-color,color,border-color;transition-duration:.2s;transition-timing-function:ease-in-out}
     </style>
     <!--合并 CSS：theme.css(主题) + icon-font.css(字体图标)-->
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/theme.css'); ?>" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/icon-font.css'); ?>" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/theme.css'); ?>">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/icon-font.css'); ?>">
+    <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>">
     <?php localizeScript(); ?>
     <!--自定义 CSS-->
     <?php if ($this->options->cssCode): ?>

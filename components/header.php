@@ -174,6 +174,33 @@ $bodyClass = implode(' ', $bodyClass);
     .bg-primary{background-color:#222!important}
     .border-primary{border-color:#222!important}
     </style>
+    <!--公众号卡片样式 CSS-->
+    <style>
+    .post-card-wechat{background:#fff;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,0.04);margin-bottom:16px;overflow:hidden;position:relative;transition:box-shadow .2s}
+    .post-card-wechat:hover{box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+    .post-card-wechat .card-link{position:absolute;top:0;left:0;right:0;bottom:0;z-index:1}
+    .post-card-wechat .card-title{font-size:17px;font-weight:600;color:#222;line-height:1.5;margin:0 0 8px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+    .post-card-wechat .wechat-row{display:flex;padding:20px;gap:18px}
+    .post-card-wechat .wechat-text{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+    .post-card-wechat .wechat-excerpt{font-size:14px;color:#999;line-height:1.7;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .post-card-wechat .wechat-date{font-size:13px;color:#ccc}
+    .post-card-wechat .wechat-thumb{width:160px;border-radius:10px;flex-shrink:0;overflow:hidden}
+    .post-card-wechat .wechat-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .post-card-wechat.wechat-noimg .wechat-body{padding:22px 20px}
+    .dark-color .post-card-wechat{background:#1a1a1f;box-shadow:0 2px 10px rgba(0,0,0,0.2)}
+    .dark-color .post-card-wechat:hover{box-shadow:0 6px 20px rgba(0,0,0,0.35)}
+    .dark-color .post-card-wechat .card-title{color:#d3d3d3}
+    .dark-color .post-card-wechat .wechat-excerpt{color:#999}
+    .dark-color .post-card-wechat .wechat-date{color:#777}
+    @media(max-width:575px){
+      .post-card-wechat .wechat-row{padding:14px;gap:12px}
+      .post-card-wechat .card-title{font-size:15px;margin-bottom:6px}
+      .post-card-wechat .wechat-excerpt{font-size:13px;margin-bottom:8px;-webkit-line-clamp:2}
+      .post-card-wechat .wechat-thumb{width:120px}
+      .post-card-wechat.wechat-noimg .wechat-body{padding:16px 14px}
+      .post-card-wechat .wechat-date{font-size:12px}
+    }
+    </style>
     <!--自定义HTML-->
     <?php if ($this->options->headHTML): ?>
         <?php $this->options->headHTML(); ?>

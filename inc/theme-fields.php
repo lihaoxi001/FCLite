@@ -5,9 +5,9 @@ function themeFields($layout) {
     // 文章列表显示设置
     $layout->addItem(new Typecho_Widget_Helper_Form_Element_Select('postListStyle', array(
         'default' => '使用系统设置',
-        'fullText' => '文章列表直接显示全文',
-        'summary' => '文章列表显示摘要和文章头图'
-    ), 'default', _t('文章列表显示'), _t('文章列表包括首页、搜索页、归档 左侧的文章列表。在显示全文的情况下，文章列表不会显示文章头图，显示全文也支持使用 <b style="color: #C7254E;">&lt!--more--&gt</b> 来手动分隔摘要。')));
+        'summary' => '不显示文章摘要（左图+标题+日期）',
+        'wechat' => '显示文章摘要（左图+标题+摘要+日期）'
+    ), 'default', _t('文章列表显示'), _t('单独设置此文章的列表显示样式。')));
 
     // 文章头图显示设置
     $layout->addItem(new Typecho_Widget_Helper_Form_Element_Select('headerImgDisplay', array(

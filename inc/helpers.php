@@ -584,9 +584,9 @@ function postImg($a, $defaultUrl) {
 
     if (!$img) return false;
 
-    // 列表页：开启 WebP 缩略图时，非 WebP 图片生成 3:2 裁剪的 WebP 缓存
+    // 列表页：开启 WebP 缩略图时，非 WebP 图片生成裁剪的 WebP 缓存
     if (isArchivePage() && Helper::options()->webpThumbnail === 'on') {
-        $thumb = generateCropWebP($img, 160);
+        $thumb = generateCropWebP($img, 320, 85, 4.0/3.0);
         return $thumb ? $thumb : $img;
     }
 
@@ -604,14 +604,15 @@ function isArchivePage() {
 }
 
 /**
- * 生成 3:2 裁剪的 WebP 缩略图
+ * 生成裁剪的 WebP 缩略图
  *
  * @param string $srcUrl 原图 URL
  * @param int $width 输出宽度（默认 480px）
  * @param int $quality WebP 质量（默认 75）
+ * @param float $ratio 裁剪宽高比（默认 3:2）
  * @return string|false 缩略图 URL 或 false
  */
-function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
+function generateCropWebP($srcUrl, $width = 480, $quality = 75, $ratio = 3.0/2.0) {
     // 只处理本站上传的图片
     $siteUrl = Helper::options()->siteUrl;
     // 相对路径补全为完整 URL
@@ -640,7 +641,7 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
     // 缩略图存到主题目录：assets/cache/thumbs/
     $themeDir = __DIR__ . '/..';
     $thumbDir = $themeDir . '/assets/cache/thumbs';
-    $thumbName = md5($srcUrl) . '_w' . $width . '.webp';
+    $thumbName = md5($srcUrl) . '_w' . $width . '_r' . str_replace('.', '_', number_format($ratio, 2)) . '.webp';
     $thumbPath = $thumbDir . '/' . $thumbName;
     $thumbUrl = Helper::options()->themeUrl . '/assets/cache/thumbs/' . $thumbName;
 
@@ -675,12 +676,12 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75) {
     $srcW = imagesx($srcImg);
     $srcH = imagesy($srcImg);
 
-    // 3:2 中心裁剪
-    $height = (int)round($width / (3.0 / 2.0));
-    $targetRatio = 3.0 / 2.0;
+    // 按指定比例中心裁剪
+    $height = (int)round($width / $ratio);
+    $targetRatio = $ratio;
     $srcRatio = $srcW / $srcH;
 
-    // 根据源图宽高比与 3:2 的关系，决定裁剪两侧还是上下
+    // 根据源图宽高比与目标比例的关系，决定裁剪两侧还是上下
     if ($srcRatio > $targetRatio) {
         // 源图更宽，裁剪左右两侧
         $cropW = (int)round($srcH * $targetRatio);
@@ -950,11 +951,11 @@ function getAdminInfo() {
  */
 function postListStyle($option, $postOption) {
     // 判断单篇文章的列表显示设置
-    if ($postOption == 'summary' or $postOption == 'fullText') {
+    if ($postOption == 'summary' or $postOption == 'fullText' or $postOption == 'wechat') {
         return $postOption;
     }
     // 判断列表全局设置
-    if ($option == 'fullText' or $option == 'summary') {
+    if ($option == 'fullText' or $option == 'summary' or $option == 'wechat') {
         return $option;
     }
     // 如果出现异常就默认显示文章摘要和

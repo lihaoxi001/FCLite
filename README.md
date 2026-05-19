@@ -2,6 +2,10 @@
 
 基于 [Facile 2.5](https://github.com/changbin1997/Facile) 深度修改，专注加载速度和简洁设计。
 
+<p align="center">
+  <img src="assets/screenshots/desktop.webp" alt="首页截图" width="700">
+</p>
+
 ## 安装
 
 在 [Releases](https://github.com/lihaoxi001/FCLite/releases) 下载最新 zip，解压到 `usr/themes/FCLite`，后台启用即可。
@@ -22,6 +26,12 @@
 - 文章分页
 - PJAX 无刷新跳转
 - 图表统计页面
+
+## 文章详情页
+
+<p align="center">
+  <img src="assets/screenshots/post.webp" alt="文章详情页截图" width="700">
+</p>
 
 ## 侧边栏组件
 

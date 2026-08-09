@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default class Directory {
+var Directory = class Directory {
   isShow = false;  // 是否打开移动设备的目录
   directoryTop = 0;  // 侧边栏章节目录的高度
 
@@ -46,8 +46,10 @@ export default class Directory {
     $('.directory-link').on('click', ev => {
       ev.preventDefault();
       const titleSelect = `[data-title="${$(ev.target).closest('a').attr('data-directory')}"]`;
+      const $stickyHeader = $('.sticky-top');
+      const headerHeight = $stickyHeader.length ? $stickyHeader.outerHeight() : 0;
       $('html').animate({
-        scrollTop: $(titleSelect).offset().top - 60
+        scrollTop: $(titleSelect).offset().top - headerHeight - 10
       }, 400);
       return false;
     });

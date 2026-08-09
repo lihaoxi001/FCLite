@@ -18,6 +18,16 @@
 
 <!--独立 JS 文件加载，替代损坏的 webpack bundle-->
 <script src="<?php $this->options->themeUrl('assets/js/jquery-3.5.1.min.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/ArticleEngagement.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/AvatarGenerator.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/accessibilityInit.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/codeHighlightInit.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/Directory.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/Emoji.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/Lightbox.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/PJAX.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/ThemeColor.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/app.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/jquery.pjax.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/highlight.pack.js'); ?>"></script>

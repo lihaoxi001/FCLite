@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default class AvatarGenerator {
+var AvatarGenerator = class AvatarGenerator {
   /**
    * 创建 AvatarGenerator 实例
    */

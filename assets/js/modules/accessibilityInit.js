@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default () => {
+var accessibilityInit = () => {
   // 文章是否加密
   if ($('.post-content .protected').length) {
     $('input[name="protectPassword"]').attr('placeholder', window.t.enterYourPassword);

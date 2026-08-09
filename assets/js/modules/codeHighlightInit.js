@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default () => {
+var codeHighlightInit = () => {
   if ($('.enable-highlight').length && $('pre').length) {
     for (let i = 0;i < $('pre').length;i ++) {
       // 是否是代码块

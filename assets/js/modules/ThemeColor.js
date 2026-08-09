@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default class ThemeColor {
+var ThemeColor = class ThemeColor {
   themeColor = 'light';  // 主题配色方案
 
   /**

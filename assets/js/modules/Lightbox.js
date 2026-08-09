@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default class Lightbox {
+var Lightbox = class Lightbox {
   imgCount = 0;  // 图片总数量
   imgIndex = null;
   srcImgSize = {width: 0, height: 0};  // 图片真实尺寸

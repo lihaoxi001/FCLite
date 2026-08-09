@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default class ArticleEngagement {
+var ArticleEngagement = class ArticleEngagement {
   /**
    * 生成分享二维码
    */

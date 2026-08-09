@@ -6,7 +6,7 @@
 * Licensed under MIT
 */
 
-export default class PJAX {
+var PJAX = class PJAX {
   commentParentId = null;  // 存储父评论的id，用于PJAX评论提交后跳转
 
   /**

@@ -17,7 +17,7 @@
 <?php endif; ?>
 
 <!--独立 JS 文件加载，替代损坏的 webpack bundle-->
-<script src="<?php $this->options->themeUrl('assets/js/jquery-3.5.1.min.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/jquery-3.5.1.min.js'); ?>" data-cfasync="false"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/ArticleEngagement.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/AvatarGenerator.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/accessibilityInit.js'); ?>"></script>

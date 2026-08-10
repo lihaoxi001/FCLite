@@ -15,7 +15,7 @@
     $('#directory-btn').on('click', function() {
       if (!isShow) {
         // Show directory
-        $('#directory-mobile').css('display', 'flex');
+        $('#directory-mobile').css({display: 'flex', width: '300px', opacity: 1, 'max-height': '70%'});
         $('#directory-mobile').animate({opacity: 1}, 250);
         isShow = true;
       } else {

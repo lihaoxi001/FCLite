@@ -22,12 +22,12 @@
 <script src="<?php $this->options->themeUrl('assets/js/modules/AvatarGenerator.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/accessibilityInit.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/codeHighlightInit.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/modules/Directory.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/modules/Directory.js'); ?>" data-cfasync="false"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/Emoji.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/Lightbox.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/PJAX.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/modules/ThemeColor.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/app.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/app.js'); ?>" data-cfasync="false"></script>
 <script src="<?php $this->options->themeUrl('assets/js/jquery.pjax.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/highlight.pack.js'); ?>"></script>
@@ -44,7 +44,7 @@ hljs.initHighlightingOnLoad();
 </script>
 <script src="<?php $this->options->themeUrl('assets/js/qrious.min.js'); ?>"></script>
 <script src="<?php $this->options->themeUrl('assets/js/clipboard.min.js'); ?>"></script>
-<script src="<?php $this->options->themeUrl('assets/js/directory-toggle.js'); ?>"></script>
+<script src="<?php $this->options->themeUrl('assets/js/directory-toggle.js'); ?>" data-cfasync="false"></script>
 <script src="<?php $this->options->themeUrl('assets/js/emoji-init.js'); ?>"></script>
 <script>
 // 点赞功能

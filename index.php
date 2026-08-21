@@ -4,7 +4,7 @@
  *
  * @package FCLite
  * @author Changbin
- * @version 2.5
+ * @version 1.0
  * @link https://www.misterma.com
  */
 

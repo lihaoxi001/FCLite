@@ -632,7 +632,7 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75, $ratio = 3.0/2.0
     // 获取绝对路径
     $relativePath = str_replace($siteUrl, '', $srcUrl);
     $relativePath = strtok($relativePath, '?');
-    $absPath = __TYPECHO_ROOT_DIR__ . '/' . $relativePath;
+    $absPath = __TYPECHO_ROOT_DIR__ . '/' . ltrim($relativePath, '/');
 
     if (!file_exists($absPath)) {
         return false;

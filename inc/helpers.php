@@ -623,11 +623,7 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75, $ratio = 3.0/2.0
         return false;
     }
 
-    // 已经是 WebP 格式就跳过
     $ext = strtolower(pathinfo(parse_url($srcUrl, PHP_URL_PATH), PATHINFO_EXTENSION));
-    if ($ext === 'webp') {
-        return false;
-    }
 
     // 获取绝对路径
     $relativePath = str_replace($siteUrl, '', $srcUrl);
@@ -666,6 +662,9 @@ function generateCropWebP($srcUrl, $width = 480, $quality = 75, $ratio = 3.0/2.0
             break;
         case 'gif':
             $srcImg = @imagecreatefromgif($absPath);
+            break;
+        case 'webp':
+            $srcImg = @imagecreatefromwebp($absPath);
             break;
         default:
             return false;

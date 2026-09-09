@@ -205,6 +205,42 @@ $bodyClass = implode(' ', $bodyClass);
     <?php if ($this->options->headHTML): ?>
         <?php $this->options->headHTML(); ?>
     <?php endif; ?>
+    <!-- SEO 结构化数据 -->
+    <?php if ($this->is('post')): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "<?php $this->title(); ?>",
+      "description": "<?php echo $this->fields->summaryContent ? htmlspecialchars($this->fields->summaryContent) : htmlspecialchars($this->excerpt(200)); ?>",
+      "image": "<?php echo $this->fields->headerImage ? $this->fields->headerImage : ''; ?>",
+      "author": {
+        "@type": "Person",
+        "name": "<?php $this->author(); ?>"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "<?php $this->options->title(); ?>"
+      },
+      "datePublished": "<?php echo date('c', $this->created); ?>",
+      "dateModified": "<?php echo date('c', $this->modified); ?>"
+    }
+    </script>
+    <?php elseif ($this->is('index')): ?>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "<?php $this->options->title(); ?>",
+      "description": "<?php echo htmlspecialchars($this->options->description); ?>",
+      "url": "<?php $this->options->siteUrl(); ?>",
+      "publisher": {
+        "@type": "Organization",
+        "name": "<?php $this->options->title(); ?>"
+      }
+    }
+    </script>
+    <?php endif; ?>
 </head>
 <body class="<?php echo $bodyClass; ?>" data-color="<?php echo $GLOBALS['color']; ?>" data-pjax="<?php $this->options->pjax(); ?>">
 <?php if ($this->options->pjax == 'on' && $this->options->pjaxProgressBar == 'on'): ?>

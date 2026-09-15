@@ -1,4 +1,4 @@
-<!-- FCLite Theme based on Facile by Changbin (https://github.com/changbin1997/Facile) -->
+<!-- FCLite Theme based on Facile by LiHaoXi (https://github.com/lihaoxi001/FCLite) -->
 <footer>
     <div class="container py-3">
         <?php if ($this->options->icp): ?>
@@ -7,7 +7,7 @@
     </div>
 </footer>
 
-<button class="btn text-primary rounded-circle d-none" id="to-top-btn" type="button" aria-label="<?php echo $GLOBALS['t']['scrollToTop']; ?>" title="<?php echo $GLOBALS['t']['scrollToTop']; ?>">
+<button class="btn text-primary rounded-circle d-none" id="to-top-btn" type="button" aria-label="<?php echo '返回顶部'; ?>" title="<?php echo '返回顶部'; ?>">
     <i class="icon-arrow-up"></i>
 </button>
 
@@ -62,7 +62,7 @@ hljs.initHighlightingOnLoad();
         xhr.onload = function(){
             if (xhr.status === 200 && /^\d+$/.test(xhr.responseText.trim())) {
                 var numEl = btn.querySelector('.agree-num');
-                if (numEl) numEl.textContent = (window.t && window.t.like ? window.t.like : '赞') + ' ' + xhr.responseText.trim();
+                if (numEl) numEl.textContent = ('赞') + ' ' + xhr.responseText.trim();
             } else {
                 btn.disabled = false;
             }

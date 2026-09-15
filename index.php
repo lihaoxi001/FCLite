@@ -3,7 +3,7 @@
  * 这是一套独立的博客主题，基于 Facile 二次开发
  *
  * @package FCLite
- * @author Changbin
+ * @author LiHaoXi
  * @version 1.0
  * @link https://www.misterma.com
  */
@@ -12,7 +12,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $GLOBALS['page'] = 'index';
 
 // 语言初始化
-languageInit();
 // 检查数据库字段
 checkField();
 $this->need('components/header.php');
@@ -24,8 +23,8 @@ $this->need('components/header.php');
         <div class="col-xl-8 col-lg-8 post-list">
             <?php if ($this->have()): ?>
             <?php $this->need('components/post-list.php'); ?>
-            <nav class="page-nav my-5" aria-label="<?php echo $GLOBALS['t']['pagination']['pagination']; ?>">
-                <?php bootstrap4Pagination($this, $GLOBALS['t']['pagination']['previousPage'], $GLOBALS['t']['pagination']['nextPage']); ?>
+            <nav class="page-nav my-5" aria-label="<?php echo '分页导航'; ?>">
+                <?php bootstrap4Pagination($this, '上一页（左光标键）', '下一页（右光标键）'); ?>
             </nav>
             <?php else: ?>
                 <article class="no-content">

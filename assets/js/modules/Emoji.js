@@ -74,7 +74,7 @@ var Emoji = class Emoji {
       // 设置用于屏幕阅读器的表情列表标题
       $('#emoji-list').attr(
         'aria-label',
-        `${$(ev.target).attr('title')} ${window.t.pressEnterToAddTheEmojiToTheCommentInputField}`
+        `${$(ev.target).attr('title')} ${'（按回车可以把表情添加到评论内容输入框）'}`
       );
     });
 

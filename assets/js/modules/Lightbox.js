@@ -167,26 +167,26 @@ var Lightbox = class Lightbox {
     <div id="max-img-box" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="img-alt" aria-describedby="img-counter">
       <p id="img-counter" aria-live="polite">${this.imgIndex + 1}/${this.imgCount}</p>
       <div class="btn-bar">
-        <button type="button" class="btn zoom-in-btn" aria-label="${window.t.zoomIn}" title="${window.t.zoomIn}">
+        <button type="button" class="btn zoom-in-btn" aria-label="${'放大'}" title="${'放大'}">
           <i class="icon-zoom-in"></i>
         </button>
-        <button type="button" class="btn zoom-out-btn" aria-label="${window.t.zoomOut}" title="${window.t.zoomOut}">
+        <button type="button" class="btn zoom-out-btn" aria-label="${'缩小'}" title="${'缩小'}">
           <i class="icon-zoom-out"></i>
         </button>
-        <button type="button" class="btn rotate-left-btn" aria-label="${window.t.rotateLeft}" title="${window.t.rotateLeft}">
+        <button type="button" class="btn rotate-left-btn" aria-label="${'左旋转90度'}" title="${'左旋转90度'}">
           <i class="icon-undo"></i>
         </button>
-        <button type="button" class="btn rotate-right-btn" aria-label="${window.t.rotateRight}" title="${window.t.rotateRight}">
+        <button type="button" class="btn rotate-right-btn" aria-label="${'右旋转90度'}" title="${'右旋转90度'}">
           <i class="icon-redo"></i>
         </button>
-        <button type="button" class="btn close-img" aria-label="${window.t.closeImage}" title="${window.t.closeImage}">
+        <button type="button" class="btn close-img" aria-label="${'关闭大图'}" title="${'关闭大图'}">
           <i class="icon-cancel-circle"></i>
         </button>
       </div>
-      <a href="javascript:;" aria-label="${window.t.previousImage}" title="${window.t.previousImage}" class="previous-image" role="button">
+      <a href="javascript:;" aria-label="${'上一张图片（左方向键）'}" title="${'上一张图片（左方向键）'}" class="previous-image" role="button">
         <i class="icon-chevron-left"></i>
       </a>
-      <a href="javascript:;" aria-label="${window.t.nextImage}" title="${window.t.nextImage}" class="next-image" role="button">
+      <a href="javascript:;" aria-label="${'下一张图片（右方向键）'}" title="${'下一张图片（右方向键）'}" class="next-image" role="button">
         <i class="icon-chevron-right"></i>
       </a>
       <p id="img-alt" aria-live="polite">${this.imgEl.alt}</p>

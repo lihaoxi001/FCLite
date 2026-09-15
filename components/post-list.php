@@ -53,7 +53,7 @@ else:
                 <?php $this->sticky(); ?>
                 <?php
                 if ($this->hidden) {
-                    echo $GLOBALS['t']['post']['thisPostIsPasswordProtected'];
+                    echo '此内容被密码保护';
                 }else {
                     $this->title();
                 }

@@ -17,7 +17,7 @@ $components = explode(',', $components);
         <?php if ($component == '博客信息'): ?>
             <!--博客信息-->
             <section class="ml-xl-4 ml-lg-3 mb-5 blog-info">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['blogInfo']; ?></h2>
+                <h2 class="mb-4"><?php echo '博客信息'; ?></h2>
                 <div>
                     <?php if (!$this->options->nickname or !$this->options->birthday or !$this->options->avatarUrl) $userInfo = getAdminInfo(); ?>
                     <div class="blog-user-info">
@@ -38,17 +38,17 @@ $components = explode(',', $components);
                     <div class="statistics mb-2">
                         <?php Typecho_Widget::widget('Widget_Stat')->to($quantity); ?>
                         <div class="mb-2">
-                            <p><i class="icon-award mr-2"></i> <?php printf($GLOBALS['t']['sidebar']['totalPosts'], $quantity->publishedPostsNum); ?></p>
+                            <p><i class="icon-award mr-2"></i> <?php printf('文章数 %d', $quantity->publishedPostsNum); ?></p>
                         </div>
                         <div class="mb-2">
-                            <p><i class="icon-bubble mr-2"></i> <?php printf($GLOBALS['t']['sidebar']['totalComments'], $quantity->publishedCommentsNum); ?></p>
+                            <p><i class="icon-bubble mr-2"></i> <?php printf('评论数 %d', $quantity->publishedCommentsNum); ?></p>
                         </div>
                         <div class="mb-2">
-                            <p><i class="icon-eye mr-2"></i> <?php printf($GLOBALS['t']['sidebar']['totalViews'], viewsCount()); ?></p>
+                            <p><i class="icon-eye mr-2"></i> <?php printf('文章阅读量 %d', viewsCount()); ?></p>
                         </div>
                         <div class="mb-2">
                             <?php $runningSince = $this->options->birthday ? round((time() - strtotime($this->options->birthday)) / 86400, 0) : round((time() - $userInfo['created']) / 86400, 0); ?>
-                            <p><i class="icon-calendar mr-2"></i> <?php printf($GLOBALS['t']['sidebar']['runningSince'], $runningSince); ?></p>
+                            <p><i class="icon-calendar mr-2"></i> <?php printf('运行天数 %d天', $runningSince); ?></p>
                         </div>
                     </div>
                 </div>
@@ -64,11 +64,11 @@ $components = explode(',', $components);
         <?php if ($component == '最新文章'): ?>
             <!--最新文章-->
             <section class="ml-xl-4 ml-lg-3 mb-5">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['latestPosts']; ?></h2>
+                <h2 class="mb-4"><?php echo '最新文章'; ?></h2>
                 <?php $latestArticles = $this->widget('Widget_Contents_Post_Recent'); ?>
                 <?php $postSize = 0; ?>
                 <?php if ($latestArticles->have()): ?>
-                    <ul aria-label="<?php echo $GLOBALS['t']['sidebar']['latestPosts']; ?>">
+                    <ul aria-label="<?php echo '最新文章'; ?>">
                         <?php while ($latestArticles->next()): ?>
                             <li>
                                 <a href="<?php $latestArticles->permalink(); ?>"><?php $latestArticles->title(); ?></a>
@@ -82,15 +82,15 @@ $components = explode(',', $components);
                         <?php endwhile; ?>
                     </ul>
                 <?php else: ?>
-                    <p class="pb-2 message"><?php echo $GLOBALS['t']['sidebar']['noPostsAvailableToDisplay']; ?></p>
+                    <p class="pb-2 message"><?php echo '没有可以显示的文章。'; ?></p>
                 <?php endif; ?>    
             </section>
         <?php endif; ?>
         <?php if ($component == '最新回复'): ?>
             <!--最新回复-->
             <section class="ml-xl-4 ml-lg-3 latest-comment mb-5">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['recentComments']; ?></h2>
-                <ul aria-label="<?php echo $GLOBALS['t']['sidebar']['recentComments']; ?>" class="list-unstyled">
+                <h2 class="mb-4"><?php echo '最新回复'; ?></h2>
+                <ul aria-label="<?php echo '最新回复'; ?>" class="list-unstyled">
                     <?php $this->widget('Widget_Comments_Recent')->to($comments); ?>
                     <?php if ($comments->have()): ?>
                         <?php while($comments->next()): ?>
@@ -111,7 +111,7 @@ $components = explode(',', $components);
                                 ?>
                                 <div class="media-body">
                                     <h3 class="mb-0 h5 text-truncate">
-                                        <a href="<?php $comments->permalink(); ?>" title="<?php printf($GLOBALS['t']['sidebar']['commentOn'], $comments->title); ?>" data-toggle="tooltip" data-placement="top">
+                                        <a href="<?php $comments->permalink(); ?>" title="<?php printf('发表在 %s 的评论', $comments->title); ?>" data-toggle="tooltip" data-placement="top">
                                             <?php $comments->author(false); ?>
                                         </a>
                                     </h3>
@@ -120,7 +120,7 @@ $components = explode(',', $components);
                             </li>
                         <?php endwhile; ?>
                     <?php else: ?>    
-                        <p class="pb-2 message"><?php echo $GLOBALS['t']['sidebar']['noCommentsOrRepliesAvailableToDisplay']; ?></p>
+                        <p class="pb-2 message"><?php echo '没有可以显示的评论和回复。'; ?></p>
                     <?php endif; ?>    
                 </ul>
             </section>
@@ -128,8 +128,8 @@ $components = explode(',', $components);
         <?php if ($component == '文章分类'): ?>
             <!--分类-->
             <section class="ml-xl-4 ml-lg-3 mb-5 category">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['categories']; ?></h2>
-                <ul aria-label="<?php echo $GLOBALS['t']['sidebar']['categories']; ?>">
+                <h2 class="mb-4"><?php echo '文章分类'; ?></h2>
+                <ul aria-label="<?php echo '文章分类'; ?>">
                     <?php $this->widget('Widget_Metas_Category_List')->to($category); ?>
                     <?php if ($category->have()): ?>
                         <?php while ($category->next()): ?>
@@ -141,7 +141,7 @@ $components = explode(',', $components);
                             </li>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <p class="pb-2 message"><?php echo $GLOBALS['t']['sidebar']['noCategoriesAvailableToDisplay']; ?></p>
+                        <p class="pb-2 message"><?php echo '没有可以显示的分类。'; ?></p>
                     <?php endif; ?>    
                 </ul>
             </section>
@@ -149,11 +149,11 @@ $components = explode(',', $components);
         <?php if ($component == '标签云'): ?>
             <!--标签云-->
             <section class="ml-xl-4 ml-lg-3 tags mb-5">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['tags']; ?></h2>
+                <h2 class="mb-4"><?php echo '标签云'; ?></h2>
                 <?php $limit = $this->options->tagCount == 0?1000:$this->options->tagCount; ?>
                 <?php $this->widget('Widget_Metas_Tag_Cloud', 'sort=mid&ignoreZeroCount=1&desc=0&limit=' . $limit)->to($tags); ?>
                 <?php if($tags->have()): ?>
-                    <div role="list" aria-label="<?php echo $GLOBALS['t']['sidebar']['tags']; ?>" class="clearfix">
+                    <div role="list" aria-label="<?php echo '标签云'; ?>" class="clearfix">
                         <?php
                         $tagsColor = array(
                             'badge-primary',
@@ -165,27 +165,27 @@ $components = explode(',', $components);
                         );
                         ?>
                         <?php while ($tags->next()): ?>
-                            <a role="listitem" title="<?php printf($GLOBALS['t']['sidebar']['tagPostCount'], $tags->count); ?>" href="<?php $tags->permalink(); ?>" rel="tag" class="p-1 float-left badge m-1 <?php echo $tagsColor[mt_rand(0, 5)]; ?>" data-toggle="tooltip" data-placement="top">
+                            <a role="listitem" title="<?php printf('%d 篇文章', $tags->count); ?>" href="<?php $tags->permalink(); ?>" rel="tag" class="p-1 float-left badge m-1 <?php echo $tagsColor[mt_rand(0, 5)]; ?>" data-toggle="tooltip" data-placement="top">
                                 <?php $tags->name(); ?>(<?php $tags->count(); ?>)
                             </a>
                         <?php endwhile; ?>
                     </div>
                 <?php else: ?>
-                    <p class="pb-2 message"><?php echo $GLOBALS['t']['sidebar']['noTagsAvailableToDisplay']; ?></p>
+                    <p class="pb-2 message"><?php echo '没有可以显示的标签。'; ?></p>
                 <?php endif; ?>
             </section>
         <?php endif; ?>
         <?php if ($component == '文章归档'): ?>
             <!--归档-->
             <section class="ml-xl-4 ml-lg-3 mb-5 archive">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['archives']; ?></h2>
+                <h2 class="mb-4"><?php echo '文章归档'; ?></h2>
                 <?php
                 // 归档时间格式
                 $format = 'Y年m月';
                 $postArchive = $this->widget('Widget_Contents_Post_Date', 'type=month&format=' . $format);
                 ?>
                 <?php if ($postArchive->have()): ?>
-                    <ul aria-label="<?php echo $GLOBALS['t']['sidebar']['archives']; ?>" class="clearfix">
+                    <ul aria-label="<?php echo '文章归档'; ?>" class="clearfix">
                         <?php while ($postArchive->next()): ?>
                             <li class="float-xl-left float-lg-none float-md-left float-sm-left float-left">
                                 <a rel="archives" href="<?php $postArchive->permalink(); ?>" class="mr-2">
@@ -196,34 +196,34 @@ $components = explode(',', $components);
                         <?php endwhile; ?>
                     </ul>
                 <?php else: ?>
-                    <p class="pb-2 message"><?php echo $GLOBALS['t']['sidebar']['coPostsAvailableToGenerateAnArchive']; ?></p>
+                    <p class="pb-2 message"><?php echo '没有文章，无法生成文章归档。'; ?></p>
                 <?php endif; ?>    
             </section>
         <?php endif; ?>
         <?php if ($component == '其它功能'): ?>
             <!--其它功能-->
             <section class="ml-xl-4 ml-lg-3 mb-5">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['other']; ?></h2>
-                <ul aria-label="<?php echo $GLOBALS['t']['sidebar']['other']; ?>">
+                <h2 class="mb-4"><?php echo '其它功能'; ?></h2>
+                <ul aria-label="<?php echo '其它功能'; ?>">
                     <?php if ($this->options->loginLink == 'show'): ?>
                         <?php if($this->user->hasLogin()): ?>
                             <li>
-                                <a href="<?php $this->options->adminUrl(); ?>"><?php printf($GLOBALS['t']['sidebar']['dashboard'], $this->user->screenName); ?></a>
+                                <a href="<?php $this->options->adminUrl(); ?>"><?php printf('进入后台 (%s)', $this->user->screenName); ?></a>
                             </li>
                             <li>
-                                <a href="<?php $this->options->logoutUrl(); ?>"><?php echo $GLOBALS['t']['sidebar']['logout']; ?></a>
+                                <a href="<?php $this->options->logoutUrl(); ?>"><?php echo '退出登录'; ?></a>
                             </li>
                         <?php else: ?>
                             <li>
-                                <a href="<?php $this->options->adminUrl('login.php'); ?>"><?php echo $GLOBALS['t']['sidebar']['login']; ?></a>
+                                <a href="<?php $this->options->adminUrl('login.php'); ?>"><?php echo '登录'; ?></a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
                     <li>
-                        <a href="<?php $this->options->feedUrl(); ?>"><?php echo $GLOBALS['t']['sidebar']['RSSforPosts']; ?></a>
+                        <a href="<?php $this->options->feedUrl(); ?>"><?php echo '文章 RSS'; ?></a>
                     </li>
                     <li>
-                        <a href="<?php $this->options->commentsFeedUrl(); ?>"><?php echo $GLOBALS['t']['sidebar']['RSSforComments']; ?></a>
+                        <a href="<?php $this->options->commentsFeedUrl(); ?>"><?php echo '评论 RSS'; ?></a>
                     </li>
                 </ul>
             </section>
@@ -232,8 +232,8 @@ $components = explode(',', $components);
             <!--友情链接-->
             <?php if ($this->options->links or $this->options->homeLinks && $this->is('index')): ?>
                 <section class="ml-xl-4 ml-lg-3 mb-5">
-                    <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['usefulLinks']; ?></h2>
-                    <ul aria-label="<?php echo $GLOBALS['t']['sidebar']['usefulLinks']; ?>">
+                    <h2 class="mb-4"><?php echo '友情链接'; ?></h2>
+                    <ul aria-label="<?php echo '友情链接'; ?>">
                         <?php if ($this->options->links): ?>
                             <?php $links = json_decode($this->options->links); ?>
                             <?php foreach ($links as $link): ?>
@@ -261,7 +261,7 @@ $components = explode(',', $components);
         <?php if ($component == '目录' && $GLOBALS['page'] == 'post' && $GLOBALS['post']['directory'] != null): ?>
             <!--用于文章页的章节目录-->
             <section class="ml-xl-4 ml-lg-3 mb-5 directory d-none d-sm-none d-md-none d-lg-block d-xl-block">
-                <h2 class="mb-4"><?php echo $GLOBALS['t']['sidebar']['tableOfContents']; ?></h2>
+                <h2 class="mb-4"><?php echo '目录'; ?></h2>
                 <?php echo $GLOBALS['post']['directory']; ?>
             </section>
         <?php endif; ?>

@@ -9,7 +9,6 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $GLOBALS['page'] = 'page-archive';
 
 // 语言初始化
-languageInit();
 $this->need('components/header.php');
 ?>
 
@@ -17,10 +16,10 @@ $this->need('components/header.php');
     <div class="row my-4">
         <div class="col-xl-8 col-lg-8 post-page mb-5 mb-sm-5 mb-md-5 mb-lg-0 mb-xl-0">
             <?php if ($this->options->breadcrumb == 'on'): ?>
-                <nav aria-label="<?php echo $GLOBALS['t']['breadcrumb']; ?>" class="breadcrumb-nav bg">
+                <nav aria-label="<?php echo '页面路径'; ?>" class="breadcrumb-nav bg">
                     <ol class="breadcrumb m-0 pl-0 pr-0 pt-0 border-0">
                         <li class="breadcrumb-item">
-                            <a href="<?php $this->options->siteUrl(); ?>"><?php echo $GLOBALS['t']['header']['home']; ?></a>
+                            <a href="<?php $this->options->siteUrl(); ?>"><?php echo '首页'; ?></a>
                         </li>
                         <li tabindex="0" class="breadcrumb-item active" aria-current="page"><?php $this->title(); ?></li>
                     </ol>
@@ -35,7 +34,7 @@ $this->need('components/header.php');
                     </header>
                     <div class="post-content mt-4">
                         <?php Typecho_Widget::widget('Widget_Stat')->to($quantity); ?>
-                        <p><?php printf($GLOBALS['t']['archivePage']['totalPosts'], $quantity->publishedPostsNum); ?></p>
+                        <p><?php printf('共包含 %d 篇文章', $quantity->publishedPostsNum); ?></p>
                         <?php
                         $stat = Typecho_Widget::widget('Widget_Stat');
                         Typecho_Widget::widget('Widget_Contents_Post_Recent', 'pageSize=' . $stat->publishedPostsNum)->to($archives);

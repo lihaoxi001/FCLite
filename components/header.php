@@ -63,7 +63,7 @@ $bodyClass = implode(' ', $bodyClass);
 ?>
 
 <!doctype html>
-<html lang="<?php echo $GLOBALS['language']; ?>">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -85,10 +85,10 @@ $bodyClass = implode(' ', $bodyClass);
     <title>
         <?php
         $this->archiveTitle(array(
-            'category' => $GLOBALS['t']['archive']['postsUnderTheCategory'],
-            'search' => $GLOBALS['t']['archive']['postsContainingTheKeyword'],
-            'tag' => $GLOBALS['t']['archive']['postsTagged'],
-            'author' => $GLOBALS['t']['archive']['postsByAuthor']
+            'category' => '分类 %s 下的文章',
+            'search' => '包含关键字 %s 的文章',
+            'tag' => '包含 %s 标签的文章',
+            'author' => '%s 发布的文章'
         ), '', ' - ');
         ?>
         <?php $this->options->title(); ?>
@@ -160,7 +160,6 @@ $bodyClass = implode(' ', $bodyClass);
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/theme.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/icon-font.css'); ?>">
     <link rel="stylesheet" href="<?php $this->options->themeUrl('assets/css/highlight.css'); ?>">
-    <?php localizeScript(); ?>
     <!--自定义 CSS-->
     <?php if ($this->options->cssCode): ?>
         <style type="text/css"><?php $this->options->cssCode(); ?></style>
@@ -258,13 +257,13 @@ $bodyClass = implode(' ', $bodyClass);
             <?php else: ?>
                 <a class="navbar-brand" href="<?php $this->options->siteUrl(); ?>"><?php $this->options->title(); ?></a>
             <?php endif; ?>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="<?php echo $GLOBALS['t']['header']['navigationMenu']; ?>">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="<?php echo '导航菜单'; ?>">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item <?php if ($this->is('index')) echo 'active'; ?>">
-                        <a class="nav-link" href="<?php $this->options->siteUrl(); ?>" <?php if ($this->is('index')) echo 'aria-current="page"'; ?>><?php echo $GLOBALS['t']['header']['home']; ?></a>
+                        <a class="nav-link" href="<?php $this->options->siteUrl(); ?>" <?php if ($this->is('index')) echo 'aria-current="page"'; ?>><?php echo '首页'; ?></a>
                     </li>
                     <?php $this->widget('Widget_Contents_Page_List')->to($pages); ?>
                     <?php while($pages->next()): ?>
@@ -296,14 +295,14 @@ $bodyClass = implode(' ', $bodyClass);
                     <?php endif; ?>
                 </ul>
                 <!--主题配色切换按钮-->
-                <button type="button" id="theme-color-toggle" class="btn btn-sm btn-outline-secondary mr-2" aria-label="<?php echo $GLOBALS['t']['sidebar']['themeColor']; ?>" title="<?php echo $GLOBALS['t']['sidebar']['themeColor']; ?>" data-toggle="tooltip" data-placement="bottom">
+                <button type="button" id="theme-color-toggle" class="btn btn-sm btn-outline-secondary mr-2" aria-label="<?php echo '主题配色'; ?>" title="<?php echo '主题配色'; ?>" data-toggle="tooltip" data-placement="bottom">
                     <span id="theme-color-icon"><?php echo $GLOBALS['color'] == 'dark-color' ? '🌙' : '☀️'; ?></span>
                 </button>
                 <form class="form-inline my-2 my-lg-0" action="<?php $this->options->siteUrl(); ?>" method="post" role="search">
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="<?php echo $GLOBALS['t']['header']['search']; ?>" required name="s">
+                        <input class="form-control" type="search" placeholder="<?php echo '搜索'; ?>" required name="s">
                         <div class="input-group-append">
-                            <button class="btn btn-primary my-sm-0" type="submit" aria-label="<?php echo $GLOBALS['t']['header']['search']; ?>" title="<?php echo $GLOBALS['t']['header']['search']; ?>" data-toggle="tooltip" data-placement="bottom">
+                            <button class="btn btn-primary my-sm-0" type="submit" aria-label="<?php echo '搜索'; ?>" title="<?php echo '搜索'; ?>" data-toggle="tooltip" data-placement="bottom">
                                 <i class="icon-search"></i>
                             </button>
                         </div>

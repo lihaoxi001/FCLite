@@ -43,7 +43,7 @@
       }
       $('#emoji-list').append(html);
       $('#emoji-title').html($(ev.target).attr('title'));
-      $('#emoji-list').attr('aria-label', $(ev.target).attr('title') + ' ' + (window.t ? window.t.pressEnterToAddTheEmojiToTheCommentInputField : ''));
+      $('#emoji-list').attr('aria-label', $(ev.target).attr('title') + ' ' + (''));
     });
 
     $('#emoji-list').on('click', '.emoji', function(ev){

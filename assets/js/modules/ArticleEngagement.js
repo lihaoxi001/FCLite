@@ -37,9 +37,9 @@ var ArticleEngagement = class ArticleEngagement {
           success: data => {
             const re = /\d/;
             if (!re.test(data)) return false;
-            $('.agree-num').html(`${window.t.like} ${data}`);
+            $('.agree-num').html(`${'赞'} ${data}`);
             // 创建点赞提示的元素
-            $('body').append(`<span id="agree-p" role="alert">${window.t.like} + 1</span>`);
+            $('body').append(`<span id="agree-p" role="alert">${'赞'} + 1</span>`);
             // 设置点赞提示的样式
             $('#agree-p').css({
               top: $('.agree-btn').offset().top - 25,

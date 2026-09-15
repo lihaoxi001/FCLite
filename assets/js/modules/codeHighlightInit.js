@@ -36,9 +36,9 @@ var codeHighlightInit = () => {
         btnEl.className = 'copy-code-btn btn btn-outline-secondary btn-sm';
         btnEl.setAttribute('type', 'button');
         btnEl.innerHTML = '<i class="icon-copy"></i>';
-        btnEl.setAttribute('aria-label', window.t.copyCode);
+        btnEl.setAttribute('aria-label', '拷贝代码');
         btnEl.setAttribute('data-clipboard-target', '#code-' + i);
-        btnEl.setAttribute('title', window.t.copyCode);
+        btnEl.setAttribute('title', '拷贝代码');
         btnEl.setAttribute('data-toggle', 'tooltip');
         btnEl.setAttribute('data-placement', 'left');
         btnEl.setAttribute('id', 'copy-btn-' + i);
@@ -51,25 +51,25 @@ var codeHighlightInit = () => {
       // 拷贝成功
       clipboard.on('success', ev => {
         // 把工具提示更改为拷贝成功
-        $(ev.trigger).attr('title', window.t.copySuccess);
-        $(ev.trigger).attr('data-original-title', window.t.copySuccess);
+        $(ev.trigger).attr('title', '拷贝成功');
+        $(ev.trigger).attr('data-original-title', '拷贝成功');
         $(ev.trigger).tooltip('update');
         $(ev.trigger).tooltip('show');
         // 延迟 1 秒后把工具提示更改为拷贝代码
         setTimeout(() => {
-          $(ev.trigger).attr('title', window.t.copyCode);
-          $(ev.trigger).attr('data-original-title', window.t.copyCode);
+          $(ev.trigger).attr('title', '拷贝代码');
+          $(ev.trigger).attr('data-original-title', '拷贝代码');
         }, 1000);
       });
       // 拷贝出错
       clipboard.on('error', ev => {
-        $(ev.trigger).attr('title', window.t.copyError);
-        $(ev.trigger).attr('data-original-title', window.t.copyError);
+        $(ev.trigger).attr('title', '拷贝出错');
+        $(ev.trigger).attr('data-original-title', '拷贝出错');
         $(ev.trigger).tooltip('hide');
         $(ev.trigger).tooltip('show');
         setTimeout(() => {
-          $(ev.trigger).attr('title', window.t.copyCode);
-          $(ev.trigger).attr('data-original-title', window.t.copyCode);
+          $(ev.trigger).attr('title', '拷贝代码');
+          $(ev.trigger).attr('data-original-title', '拷贝代码');
         }, 1000);
       });
     }

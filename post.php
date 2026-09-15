@@ -10,7 +10,6 @@ if (isset($_POST['agree'])) {
 }
 
 // 语言初始化
-languageInit();
 // 获取文章底部交互区域的按钮设置
 $engagementSection = str_replace(' ', '', $this->options->engagementSection);
 if ($engagementSection != '') $engagementSection = explode(',', $engagementSection);
@@ -22,10 +21,10 @@ $this->need('components/header.php');
     <div class="row my-4">
         <div class="col-xl-8 col-lg-8 post-page mb-5 mb-sm-5 mb-md-5 mb-lg-0 mb-xl-0">
             <?php if ($this->options->breadcrumb == 'on'): ?>
-                <nav aria-label="<?php echo $GLOBALS['t']['breadcrumb']; ?>" class="breadcrumb-nav bg">
+                <nav aria-label="<?php echo '页面路径'; ?>" class="breadcrumb-nav bg">
                     <ol class="breadcrumb m-0 pl-0 pr-0 pt-0 border-0">
                         <li class="breadcrumb-item">
-                            <a href="<?php $this->options->siteUrl(); ?>"><?php echo $GLOBALS['t']['header']['home']; ?></a>
+                            <a href="<?php $this->options->siteUrl(); ?>"><?php echo '首页'; ?></a>
                         </li>
                         <li class="breadcrumb-item">
                             <?php $this->category(' '); ?>
@@ -41,7 +40,7 @@ $this->need('components/header.php');
                             <a href="<?php $this->permalink(); ?>" rel="bookmark">
                                 <?php
                                 if ($this->hidden) {
-                                    echo $GLOBALS['t']['post']['thisPostIsPasswordProtected'];
+                                    echo '此内容被密码保护';
                                 }else {
                                     $this->title();
                                 }
@@ -56,24 +55,24 @@ $this->need('components/header.php');
                         </div>
                     <?php endif; ?>
                     <div class="post-info mt-2">
-                        <span class="ml-1" title="<?php echo $GLOBALS['t']['post']['publicationDate']; ?>" data-toggle="tooltip" data-placement="top">
+                        <span class="ml-1" title="<?php echo '发布日期'; ?>" data-toggle="tooltip" data-placement="top">
                             <i class="icon-calendar mr-2" aria-hidden="true"></i>
                             <time datetime="<?php echo date('c', $this->created); ?>"><?php echo postDateFormat($this->created); ?></time>
                         </span>
-                        <span class="ml-2" title="<?php echo $GLOBALS['t']['post']['author']; ?>" data-toggle="tooltip" data-placement="top">
+                        <span class="ml-2" title="<?php echo '作者'; ?>" data-toggle="tooltip" data-placement="top">
                             <i class="icon-user mr-2" aria-hidden="true"></i>
                             <a rel="author" href="<?php $this->author->permalink(); ?>" class="mr-2" title="作者：<?php $this->author(); ?>">
                                 <?php $this->author(); ?>
                             </a>
                         </span>
-                        <span class="ml-2" title="<?php echo $GLOBALS['t']['post']['views']; ?>" data-toggle="tooltip" data-placement="top">
+                        <span class="ml-2" title="<?php echo '阅读量'; ?>" data-toggle="tooltip" data-placement="top">
                             <i class="icon-eye mr-2" aria-hidden="true"></i>
                             <?php echo postViews($this); ?>
                         </span>
                         <?php if ($this->user->hasLogin()): ?>
                           <span class="ml-2">
                               <i class="icon-pencil mr-2" aria-hidden="true"></i>
-                              <a href="<?php echo $this->options->adminUrl . 'write-post.php?cid=' . $this->cid; ?>"><?php echo $GLOBALS['t']['post']['edit']; ?></a>
+                              <a href="<?php echo $this->options->adminUrl . 'write-post.php?cid=' . $this->cid; ?>"><?php echo '编辑'; ?></a>
                           </span>
                         <?php endif; ?>
                     </div>
@@ -98,11 +97,11 @@ $this->need('components/header.php');
                     </div>
 
                     <?php if (count($GLOBALS['postPage']) > 1): ?>
-                        <nav aria-label="<?php echo $GLOBALS['t']['pagination']['postContentPagination']; ?>" class="py-3 post-pagination">
+                        <nav aria-label="<?php echo '文章内容分页'; ?>" class="py-3 post-pagination">
                             <ol class="pagination justify-content-center">
                                 <?php if ($postPageNum > 1): ?>
                                     <li class="page-item">
-                                        <a href="<?php echo $this->permalink . '?post-page=' . ($postPageNum - 1); ?>" class="page-link previous-page" aria-label="<?php echo $GLOBALS['t']['pagination']['previousPage']; ?>" title="<?php echo $GLOBALS['t']['pagination']['previousPage']; ?>" data-toggle="tooltip" data-placement="top">
+                                        <a href="<?php echo $this->permalink . '?post-page=' . ($postPageNum - 1); ?>" class="page-link previous-page" aria-label="<?php echo '上一页（左光标键）'; ?>" title="<?php echo '上一页（左光标键）'; ?>" data-toggle="tooltip" data-placement="top">
                                             <i class="icon-chevron-left"></i>
                                         </a>
                                     </li>
@@ -114,7 +113,7 @@ $this->need('components/header.php');
                                 <?php endfor; ?>
                                 <?php if ($postPageNum < count($GLOBALS['postPage'])): ?>
                                     <li class="page-item">
-                                        <a href="<?php echo $this->permalink . '?post-page=' . ($postPageNum + 1); ?>" class="page-link next-page" aria-label="<?php echo $GLOBALS['t']['pagination']['nextPage']; ?>" title="<?php echo $GLOBALS['t']['pagination']['nextPage']; ?>" data-toggle="tooltip" data-placement="top">
+                                        <a href="<?php echo $this->permalink . '?post-page=' . ($postPageNum + 1); ?>" class="page-link next-page" aria-label="<?php echo '下一页（右光标键）'; ?>" title="<?php echo '下一页（右光标键）'; ?>" data-toggle="tooltip" data-placement="top">
                                             <i class="icon-chevron-right"></i>
                                         </a>
                                     </li>
@@ -124,11 +123,11 @@ $this->need('components/header.php');
                     <?php endif; ?>
 
                     <div class="category-tag clearfix my-4">
-                        <div class="post-category float-left" role="group" aria-label="<?php echo $GLOBALS['t']['post']['category']; ?>">
+                        <div class="post-category float-left" role="group" aria-label="<?php echo '文章分类'; ?>">
                             <i class="icon-folder-open mr-1" aria-hidden="true"></i>
                             <?php $this->category(' '); ?>
                         </div>
-                        <div class="post-tag float-right" role="group" aria-label="<?php echo $GLOBALS['t']['post']['tag']; ?>">
+                        <div class="post-tag float-right" role="group" aria-label="<?php echo '标签'; ?>">
                             <i class="icon-price-tag mr-1" aria-hidden="true"></i>
                             <?php postTadAddStyle($this); ?>
                         </div>
@@ -142,19 +141,19 @@ $this->need('components/header.php');
                                     <?php $agree = $this->hidden?array('agree' => 0, 'recording' => true):agreeNum($this->cid); ?>
                                     <button type="button" class="btn btn-sm agree-btn mr-2" <?php if ($agree['recording']) echo 'disabled'; ?> data-cid="<?php echo $this->cid; ?>" data-url="<?php $this->permalink(); ?>">
                                         <i class="icon-thumbs-up"></i>
-                                        <span class="agree-num"><?php echo $GLOBALS['t']['post']['like']; ?> <?php echo $agree['agree']; ?></span>
+                                        <span class="agree-num"><?php echo '赞'; ?> <?php echo $agree['agree']; ?></span>
                                     </button>
                                 <?php endif; ?>
                                 <?php if ($val == '打赏'): ?>
                                     <button type="button" class="btn btn-sm mr-2" data-toggle="collapse" data-target="#reward-qr" aria-expanded="false">
                                         <i class="icon-coffee"></i>
-                                        <span><?php echo $GLOBALS['t']['post']['donate']; ?></span>
+                                        <span><?php echo '打赏'; ?></span>
                                     </button>
                                 <?php endif; ?>
                                 <?php if ($val == '分享'): ?>
                                     <button type="button" class="btn btn-sm mr-2" data-toggle="collapse" data-target="#qr-link" aria-expanded="false" aria-controls="collapseExample">
                                         <i class="icon-share2"></i>
-                                        <span><?php echo $GLOBALS['t']['post']['share']; ?></span>
+                                        <span><?php echo '分享'; ?></span>
                                     </button>
                                 <?php endif; ?>
                             <?php endforeach; ?>
@@ -163,7 +162,7 @@ $this->need('components/header.php');
                             <!--打赏二维码-->
                             <div class="collapse" id="reward-qr">
                                 <div class="mt-4 text-center qr">
-                                    <img src="<?php $this->options->rewardQr(); ?>" alt="<?php echo $GLOBALS['t']['post']['QRCode']; ?>">
+                                    <img src="<?php $this->options->rewardQr(); ?>" alt="<?php echo '二维码'; ?>">
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -171,17 +170,17 @@ $this->need('components/header.php');
                             <!--分享区域-->
                             <div class="collapse" id="qr-link">
                                 <div class="mt-4 qr-link">
-                                    <p class="text-center mb-2"><?php echo $GLOBALS['t']['post']['scanTheQRCodeBelowToViewAndShareThisPageOnYourPhone']; ?></p>
+                                    <p class="text-center mb-2"><?php echo '用手机扫描下方二维码可在手机上浏览和分享。'; ?></p>
                                     <div class="text-center">
-                                        <canvas id="qr" class="mb-1" aria-label="<?php echo $GLOBALS['t']['post']['QRCode']; ?>"></canvas>
+                                        <canvas id="qr" class="mb-1" aria-label="<?php echo '二维码'; ?>"></canvas>
                                         <div class="link-box">
-                                            <a href="https://service.weibo.com/share/share.php?url=<?php $this->permalink(); ?>&title=<?php $this->title(); ?>" target="_blank" rel="external nofollow" aria-label="<?php echo $GLOBALS['t']['post']['shareOnWeibo']; ?>" title="<?php echo $GLOBALS['t']['post']['shareOnWeibo']; ?>" data-toggle="tooltip" data-placement="top">
+                                            <a href="https://service.weibo.com/share/share.php?url=<?php $this->permalink(); ?>&title=<?php $this->title(); ?>" target="_blank" rel="external nofollow" aria-label="<?php echo '分享到微博'; ?>" title="<?php echo '分享到微博'; ?>" data-toggle="tooltip" data-placement="top">
                                                 <i class="icon-sina-weibo mr-1"></i>
                                             </a>
-                                            <a class="text-info" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<?php $this->permalink(); ?>&title=<?php $this->title(); ?>&site=<?php $this->options->siteUrl(); ?>&summary=<?php $this->fields->summaryContent?$this->fields->summaryContent():$this->excerpt($this->options->summary, '...'); ?>" target="_blank" rel="external nofollow" aria-label="<?php echo $GLOBALS['t']['post']['shareOnQzone']; ?>" title="<?php echo $GLOBALS['t']['post']['shareOnQzone']; ?>" data-toggle="tooltip" data-placement="top">
+                                            <a class="text-info" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<?php $this->permalink(); ?>&title=<?php $this->title(); ?>&site=<?php $this->options->siteUrl(); ?>&summary=<?php $this->fields->summaryContent?$this->fields->summaryContent():$this->excerpt($this->options->summary, '...'); ?>" target="_blank" rel="external nofollow" aria-label="<?php echo '分享到QQ空间'; ?>" title="<?php echo '分享到QQ空间'; ?>" data-toggle="tooltip" data-placement="top">
                                                 <i class="icon-qzone-logo mr-1"></i>
                                             </a>
-                                            <a class="text-info" href="https://twitter.com/intent/tweet?url=<?php $this->permalink(); ?>&text=<?php $this->title(); ?>" target="_blank" rel="external nofollow" aria-label="<?php  echo $GLOBALS['t']['post']['shareOnTwitter']; ?>" title="<?php  echo $GLOBALS['t']['post']['shareOnTwitter']; ?>" data-toggle="tooltip" data-placement="top">
+                                            <a class="text-info" href="https://twitter.com/intent/tweet?url=<?php $this->permalink(); ?>&text=<?php $this->title(); ?>" target="_blank" rel="external nofollow" aria-label="<?php  echo '分享到Twitter'; ?>" title="<?php  echo '分享到Twitter'; ?>" data-toggle="tooltip" data-placement="top">
                                                 <i class="icon-twitter mr-1"></i>
                                             </a>
                                         </div>
@@ -194,15 +193,15 @@ $this->need('components/header.php');
                 <div class="post-navigation border-top border-bottom py-4">
                     <nav class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 previous">
-                            <div id="previous-post-text"><?php echo $GLOBALS['t']['post']['previousPost']; ?></div>
+                            <div id="previous-post-text"><?php echo '上一篇'; ?></div>
                             <div class="text-truncate">
-                                <?php $this->thePrev('%s', $GLOBALS['t']['post']['none']); ?>
+                                <?php $this->thePrev('%s', '没有了'); ?>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 next">
-                            <div class="text-lg-right text-xl-right text-md-right" id="next-post-text"><?php echo $GLOBALS['t']['post']['nextPost']; ?></div>
+                            <div class="text-lg-right text-xl-right text-md-right" id="next-post-text"><?php echo '下一篇'; ?></div>
                             <div class="text-lg-right text-xl-right text-md-right next-box text-truncate">
-                                <?php $this->theNext('%s', $GLOBALS['t']['post']['none']); ?>
+                                <?php $this->theNext('%s', '没有了'); ?>
                             </div>
                         </div>
                     </nav>
@@ -213,13 +212,13 @@ $this->need('components/header.php');
         <?php $this->need('components/sidebar.php'); ?>
     </div>
     <?php if ($this->options->directoryMobile == 'enable'): ?>
-        <button type="button" id="directory-btn" class="btn text-primary rounded-circle border d-block d-sm-block d-md-block d-lg-none d-xl-none" aria-expanded="false" aria-label="<?php echo $GLOBALS['t']['sidebar']['tableOfContents']; ?>" title="<?php echo $GLOBALS['t']['sidebar']['tableOfContents']; ?>">
+        <button type="button" id="directory-btn" class="btn text-primary rounded-circle border d-block d-sm-block d-md-block d-lg-none d-xl-none" aria-expanded="false" aria-label="<?php echo '目录'; ?>" title="<?php echo '目录'; ?>">
             <i class="icon-list-ol"></i>
         </button>
         <div id="directory-mobile" class="border rounded shadow" style="display: none;">
             <div class="title-bar border-bottom">
-                <h5 class="m-0"><?php echo $GLOBALS['t']['sidebar']['tableOfContents']; ?></h5>
-                <button type="button" class="btn btn-sm close-btn" aria-label="<?php echo $GLOBALS['t']['sidebar']['closeTableOfContents']; ?>" title="<?php echo $GLOBALS['t']['sidebar']['closeTableOfContents']; ?>">
+                <h5 class="m-0"><?php echo '目录'; ?></h5>
+                <button type="button" class="btn btn-sm close-btn" aria-label="<?php echo '关闭目录'; ?>" title="<?php echo '关闭目录'; ?>">
                     <i class="icon-cancel-circle"></i>
                 </button>
             </div>

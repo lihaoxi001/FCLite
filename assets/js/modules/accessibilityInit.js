@@ -9,10 +9,10 @@
 var accessibilityInit = () => {
   // 文章是否加密
   if ($('.post-content .protected').length) {
-    $('input[name="protectPassword"]').attr('placeholder', window.t.enterYourPassword);
+    $('input[name="protectPassword"]').attr('placeholder', '请在此处输入密码');
     $('input[name="protectPassword"]').focus();
-    $('.protected .submit').val(window.t.submit);
-    $('.protected .word').html(window.t.enterThePasswordToViewIt);
+    $('.protected .submit').val('提交');
+    $('.protected .word').html('请输入密码访问');
   }
 
   // 给文章内的链接添加 target 属性
@@ -30,7 +30,7 @@ var accessibilityInit = () => {
     if ($('.comment-list .comment-input').length && $('#cancel-comment-reply-link').length) {
       $('#cancel-comment-reply-link').addClass('btn btn-outline-primary ml-2');
       $('#cancel-comment-reply-link').attr('role', 'button');
-      $('#cancel-comment-reply-link').html(window.t.cancelReply);
+      $('#cancel-comment-reply-link').html('取消回复');
     }
   });
 
@@ -53,7 +53,7 @@ var accessibilityInit = () => {
     const authorName = $(this).closest('.comment-box').find('.author a').text() ||
         $(this).closest('.comment-box').find('.author').text();
     $(this).find('a').attr({
-      title: `${window.t.replyTo} ${authorName}`,
+      title: `${'回复'} ${authorName}`,
       'data-toggle': 'tooltip',
       'data-placement': 'top'
     });

@@ -1,48 +1,6 @@
 <?php
 
 /**
- * 初始化语言
- *
- * @return void
- */
-function languageInit() {
-    require_once __DIR__ . '/../languages/zh.php';
-    $GLOBALS['t'] = ZH;
-    $GLOBALS['language'] = 'zh-CN';
-}
-
-/**
- * 把一些支持多语言显示的内容传给 JS 显示
- *
- * @return void
- */
-function localizeScript() {
-    // 需要传给 JS 的翻译内容
-    $t = array(
-        'pressEnterToAddTheEmojiToTheCommentInputField' => $GLOBALS['t']['emoji']['pressEnterToAddTheEmojiToTheCommentInputField'],
-        'zoomIn' => $GLOBALS['t']['imageLightbox']['zoomIn'],
-        'zoomOut' => $GLOBALS['t']['imageLightbox']['zoomOut'],
-        'rotateLeft' => $GLOBALS['t']['imageLightbox']['rotateLeft'],
-        'rotateRight' => $GLOBALS['t']['imageLightbox']['rotateRight'],
-        'closeImage' => $GLOBALS['t']['imageLightbox']['closeImage'],
-        'nextImage' => $GLOBALS['t']['imageLightbox']['nextImage'],
-        'previousImage' => $GLOBALS['t']['imageLightbox']['previousImage'],
-        'copyCode' => $GLOBALS['t']['code']['copyCode'],
-        'copySuccess' => $GLOBALS['t']['code']['copySuccess'],
-        'copyError' => $GLOBALS['t']['code']['copyError'],
-        'cancelReply' => $GLOBALS['t']['comment']['cancelReply'],
-        'enterThePasswordToViewIt' => $GLOBALS['t']['post']['enterThePasswordToViewIt'],
-        'enterYourPassword' => $GLOBALS['t']['post']['enterYourPassword'],
-        'submit' => $GLOBALS['t']['post']['submit'],
-        'replyTo' => $GLOBALS['t']['comment']['replyTo'],
-        'like' => $GLOBALS['t']['post']['like'],
-        'categoryDistribution' => $GLOBALS['t']['dataPage']['categoryDistribution']
-    );
-    $t = json_encode($t, JSON_UNESCAPED_UNICODE);
-    echo '<script type="text/javascript"> window.t = ' . $t . ' </script>';
-}
-
-/**
  * 格式化文章日期
  *
  * @param int $date 时间戳
@@ -310,7 +268,7 @@ function reply($parent) {
 
     $db = Typecho_Db::get();
     $commentInfo = $db->fetchRow($db->select('author,status,mail')->from('table.comments')->where('coid = ?', $parent));
-    $link = '<span class="mx-2">' . $GLOBALS['t']['comment']['reply'] . '</span><b><a class="parent mr-1" href="#comment-' . $parent . '">' . $commentInfo['author'] .  '</a></b>';
+    $link = '<span class="mx-2">' . '回复' . '</span><b><a class="parent mr-1" href="#comment-' . $parent . '">' . $commentInfo['author'] .  '</a></b>';
     return $link;
 }
 
@@ -462,13 +420,7 @@ function commentDateFormat($date, $options = 'format1') {
     }
     // 时间间隔
     if ($options == 'format4') {
-        if ($GLOBALS['language'] == 'en') {
-            // 英文
-            return formatTimeDifferenceEN($date);
-        }else {
-            // 中文
-            return formatTimeDifferenceZH($date);
-        }
+        return formatTimeDifferenceZH($date);
     }
 }
 
@@ -493,32 +445,6 @@ function formatTimeDifferenceZH($timestamp) {
     }
 }
 
-/**
- * 计算时间间隔（英文）
- *
- * @param int $timestamp 时间戳
- * @return string 返回英文的时间间隔
- */
-function formatTimeDifferenceEN($timestamp) {
-    $diff = time() - $timestamp;
-
-    if ($diff < 60) {
-        return $diff == 1 ? "1 second ago" : "$diff seconds ago";
-    }
-
-    $minutes = floor($diff / 60);
-    if ($minutes < 60) {
-        return $minutes == 1 ? "1 minute ago" : "$minutes minutes ago";
-    }
-
-    $hours = floor($minutes / 60);
-    if ($hours < 24) {
-        return $hours == 1 ? "1 hour ago" : "$hours hours ago";
-    }
-
-    $days = floor($hours / 24);
-    return $days == 1 ? "1 day ago" : "$days days ago";
-}
 
 /**
  * 获取文章头图显示设置
@@ -874,7 +800,7 @@ function articleDirectory($content) {
  */
 function renderArticleDirectory($tree, $parent = '') {
     $index = 1;
-    $ariaLabel = $tree[0]['parent_id'] == 0?'aria-label="' . $GLOBALS['t']['sidebar']['tableOfContents'] . '"':'';
+    $ariaLabel = $tree[0]['parent_id'] == 0?'aria-label="' . '目录' . '"':'';
     $htmlStr = '<ul class="article-directory"' . $ariaLabel . '>';
     foreach ($tree as $item) {
         $num = $parent == ''?$index:$parent . '.' . $index;
@@ -1109,7 +1035,7 @@ function addBootstrapTableClasses($html) {
 function postTadAddStyle($post) {
     // 拦截输出
     ob_start();
-    $post->tags(' ', true, $GLOBALS['t']['post']['noneTag']);
+    $post->tags(' ', true, '暂无标签');
     $content = ob_get_contents();
     ob_end_clean();
     // 给标签链接添加 class

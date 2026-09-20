@@ -8,3 +8,4 @@ components/*.bak.*
 # Backup files
 *.bak
 *.bak.*
+node_modules/
